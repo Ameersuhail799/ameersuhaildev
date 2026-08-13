@@ -441,8 +441,8 @@ export function CognitionHero({ onExitIntro, isExiting }) {
     <div
       ref={heroRef}
       aria-label="Portfolio Entrance Experience"
-      className={`fixed inset-0 z-[99999] w-screen h-[100dvh] min-h-[34rem] min-w-[320px] overflow-hidden bg-[#030304] select-none isolation-isolate transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        isExiting ? "translate-y-[-100%] opacity-0 filter blur-sm" : "translate-y-0 opacity-100"
+      className={`fixed inset-0 z-[99999] w-screen h-[100dvh] min-h-[34rem] min-w-[320px] overflow-hidden bg-[#030304] select-none isolation-isolate transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        isExiting ? "translate-y-[-100%] opacity-0 filter blur-sm pointer-events-none" : "translate-y-0 opacity-100"
       }`}
       onPointerEnter={handlePointerEnter}
       onPointerMove={handlePointerMove}

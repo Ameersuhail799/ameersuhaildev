@@ -29,10 +29,10 @@ const PreloaderWrapper = ({ children }) => {
 
     setTimeout(() => {
       setEntryState("intro");
-    }, 700);
+    }, 400);
   };
 
-  // STAGE 2 -> STAGE 3: CognitionHero (User Action) -> Original Portfolio
+  // STAGE 2 -> STAGE 3: CognitionHero (User Action) -> Seamless Portfolio
   const handleExitIntro = () => {
     if (entryState !== "intro") return;
     setEntryState("entering_portfolio");
@@ -43,12 +43,12 @@ const PreloaderWrapper = ({ children }) => {
       document.documentElement.classList.add("portfolio-active");
       document.body.classList.add("portfolio-active");
       window.scrollTo({ top: 0, behavior: "instant" });
-    }, 1000);
+    }, 500);
   };
 
   return (
     <>
-      {/* ── STAGE 1: NEW DARK CINEMATIC LOADER ── */}
+      {/* ── STAGE 1: CINEMATIC INITIAL LOADER ── */}
       {(entryState === "loading" || entryState === "exiting_loading") && (
         <PortfolioLoader
           onLoadingComplete={handleLoadingComplete}
@@ -56,7 +56,7 @@ const PreloaderWrapper = ({ children }) => {
         />
       )}
 
-      {/* ── STAGE 2: FULL-VIEWPORT COGNITION HERO INTRO ── */}
+      {/* ── STAGE 2: FULL-VIEWPORT INTRO (Fades & slides up cleanly) ── */}
       {(entryState === "intro" || entryState === "entering_portfolio") && (
         <CognitionHero
           onExitIntro={handleExitIntro}
@@ -64,8 +64,16 @@ const PreloaderWrapper = ({ children }) => {
         />
       )}
 
-      {/* ── STAGE 3: ORIGINAL PORTFOLIO (Navbar, Banner, etc.) ── */}
-      {entryState === "portfolio" && children}
+      {/* ── STAGE 3: MAIN PORTFOLIO (Pre-mounted in DOM to ensure zero transition lag) ── */}
+      <div
+        className={`w-full transition-opacity duration-500 ease-out ${
+          entryState === "portfolio" || entryState === "entering_portfolio"
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        }`}
+      >
+        {children}
+      </div>
     </>
   );
 };
