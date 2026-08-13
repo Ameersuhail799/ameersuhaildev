@@ -33,14 +33,14 @@ const Banner = () => {
               <div data-aos="fade-right" data-aos-duration="600" data-aos-delay="200" data-aos-easing="ease-out-cubic">
                 <TypeAnimation
                   sequence={[
-                    `A Fullstack Developer.`,
-                    1000,
-                    `An AI/ML Enthusiast.`,
-                    1000,
-                    `A MERN Stack Developer.`,
-                    1000,
-                    `A Frontend Developer.`,
-                    1000,
+                    `An AI-Powered Software Engineer.`,
+                    1200,
+                    `An AI Engineer & Full-Stack Creator.`,
+                    1200,
+                    `Building Intelligent AI Systems.`,
+                    1200,
+                    `Architecting Next-Gen Web & AI Apps.`,
+                    1200,
                   ]}
                   className='text-[25px] lg:text-[38px] text-[#C9C5D0]'
                   wrapper="span"
