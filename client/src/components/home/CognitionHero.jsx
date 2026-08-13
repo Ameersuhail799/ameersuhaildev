@@ -18,7 +18,7 @@ export function CognitionHero({ onExitIntro, isExiting }) {
   const [discoveryState, setDiscoveryState] = useState("explore"); // 'explore' -> 'detected' -> 'ready'
   const isMobileRef = useRef(false);
 
-  // Animation & Liquid simulation refs (No React state inside RAF loop)
+  // Animation & Liquid simulation refs
   const nodesRef = useRef(
     Array.from({ length: 16 }, () => ({ x: -1000, y: -1000 }))
   );
@@ -34,7 +34,7 @@ export function CognitionHero({ onExitIntro, isExiting }) {
   const clockRef = useRef(0);
   const animFrameIdRef = useRef(null);
 
-  // DevicePixelRatio cap (1 for mobile to guarantee 60fps, 1.5 for desktop)
+  // DevicePixelRatio cap (1 for mobile for 60fps, 1.25 for desktop)
   const dprRef = useRef(1);
 
   // Preload images on mount
@@ -133,7 +133,7 @@ export function CognitionHero({ onExitIntro, isExiting }) {
     };
   }, [imagesLoaded, isExiting, onExitIntro]);
 
-  // Main RAF Engine Loop (Ultra-optimized for 60fps Mobile Performance)
+  // Main Canvas Rendering Loop with 100% Guaranteed 1:1 Image Alignment on Mobile & Desktop
   useEffect(() => {
     if (!imagesLoaded || !heroRef.current || !mainCanvasRef.current) return;
 
@@ -146,6 +146,11 @@ export function CognitionHero({ onExitIntro, isExiting }) {
     const fieldCanvas = document.createElement("canvas");
     const fieldCtx = fieldCanvas.getContext("2d");
     if (!fieldCtx) return;
+
+    // Create offscreen composite canvas for liquid mask
+    const maskCanvas = document.createElement("canvas");
+    const maskCtx = maskCanvas.getContext("2d");
+    if (!maskCtx) return;
 
     // Check reduced motion preference
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -169,13 +174,18 @@ export function CognitionHero({ onExitIntro, isExiting }) {
       const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 1.25);
       dprRef.current = dpr;
 
-      // Main canvas resolution
-      mainCanvas.width = Math.round(width * dpr);
-      mainCanvas.height = Math.round(height * dpr);
+      // Canvas dimensions
+      const cw = Math.round(width * dpr);
+      const ch = Math.round(height * dpr);
+
+      mainCanvas.width = cw;
+      mainCanvas.height = ch;
+      maskCanvas.width = cw;
+      maskCanvas.height = ch;
 
       // Offscreen field canvas operating at 0.5x resolution for silky performance
-      fieldCanvas.width = Math.max(1, Math.round(mainCanvas.width * 0.5));
-      fieldCanvas.height = Math.max(1, Math.round(mainCanvas.height * 0.5));
+      fieldCanvas.width = Math.max(1, Math.round(cw * 0.5));
+      fieldCanvas.height = Math.max(1, Math.round(ch * 0.5));
     };
 
     updateSize();
@@ -207,13 +217,10 @@ export function CognitionHero({ onExitIntro, isExiting }) {
       if (prefersReducedMotion) {
         engagementRef.current = targetEng;
       } else {
-        // Fast responsive engagement decay
         engagementRef.current += (targetEng - engagementRef.current) * (isMobile ? 0.2 : 0.14);
       }
 
       const eng = engagementRef.current;
-
-      // CSS variable --p for glow & status text
       heroEl.style.setProperty("--p", eng.toFixed(3));
 
       // Node spring physics for liquid tail
@@ -232,7 +239,7 @@ export function CognitionHero({ onExitIntro, isExiting }) {
         }
       }
 
-      // Touch liquid head radius (Desktop stays at 100, Mobile increased to 150 for larger touch reveal)
+      // Touch liquid head radius (Desktop = 100, Mobile = 150)
       const headRadius = (isMobile ? 150 : 100) * dpr;
 
       // 1. Render offscreen field mask
@@ -242,7 +249,7 @@ export function CognitionHero({ onExitIntro, isExiting }) {
 
       if (eng > 0.0005) {
         fieldCtx.globalCompositeOperation = "lighter";
-        const fieldScale = 0.5; // Matches 0.5x resolution scale
+        const fieldScale = 0.5;
         const numNodes = nodes.length;
 
         for (let i = 0; i < numNodes; i++) {
@@ -271,28 +278,30 @@ export function CognitionHero({ onExitIntro, isExiting }) {
       // 2. Clear main canvas
       mainCtx.clearRect(0, 0, cw, ch);
 
-      // 3. Composite reveal image over liquid mask (Pixel-for-pixel alignment 1:1)
-      if (eng > 0.0005 && revealImg && baseImg) {
-        // Draw low-res field scaled up to main canvas (fast natural soft edge without expensive GPU blur filter)
-        mainCtx.drawImage(fieldCanvas, 0, 0, cw, ch);
+      // 3. Draw BOTH baseImg and revealImg using the EXACT SAME scale & offsets for 100.0% pixel alignment
+      if (baseImg && revealImg) {
+        // Calculate centered cover scale & offsets identically for both images
+        const scale = Math.max(cw / baseImg.width, ch / baseImg.height);
+        const drawW = baseImg.width * scale;
+        const drawH = baseImg.height * scale;
 
-        // Set mask composition mode
-        mainCtx.globalCompositeOperation = "source-in";
-
-        // Calculate exact 1:1 matching object-fit cover metrics for both Base & Reveal images
-        const scale = Math.max(cw / revealImg.width, ch / revealImg.height);
-        const drawW = revealImg.width * scale;
-        const drawH = revealImg.height * scale;
-
-        // Centered cover calculation matching CSS object-cover object-center 1:1
         const offsetX = (cw - drawW) / 2;
         const offsetY = (ch - drawH) / 2;
 
-        // Draw reveal image inside liquid mask
-        mainCtx.drawImage(revealImg, offsetX, offsetY, drawW, drawH);
+        // Draw Base Image on Canvas first
+        mainCtx.drawImage(baseImg, offsetX, offsetY, drawW, drawH);
 
-        // Reset composite mode
-        mainCtx.globalCompositeOperation = "source-over";
+        // Draw Reveal Image inside Liquid Mask if active
+        if (eng > 0.0005) {
+          maskCtx.clearRect(0, 0, cw, ch);
+          maskCtx.globalCompositeOperation = "source-over";
+          maskCtx.drawImage(fieldCanvas, 0, 0, cw, ch);
+          maskCtx.globalCompositeOperation = "source-in";
+          maskCtx.drawImage(revealImg, offsetX, offsetY, drawW, drawH);
+
+          // Composite reveal liquid mask onto main canvas
+          mainCtx.drawImage(maskCanvas, 0, 0, cw, ch);
+        }
       }
 
       animFrameIdRef.current = requestAnimationFrame(animate);
@@ -309,7 +318,7 @@ export function CognitionHero({ onExitIntro, isExiting }) {
     };
   }, [imagesLoaded]);
 
-  // Pointer & Mobile Touch Handlers
+  // Pointer & Touch Handlers
   const handlePointerEnter = (e) => {
     triggerInteractionState();
     if (e.pointerType === "mouse") {
@@ -423,32 +432,14 @@ export function CognitionHero({ onExitIntro, isExiting }) {
         Ameer Suhail — AI/ML Engineer & Creative Developer Intro Experience
       </h1>
 
-      {/* LAYER 1: Base Portrait Image (Matched 1:1 with Canvas Cover Math) */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full z-0 pointer-events-none"
-      >
-        <picture className="w-full h-full">
-          <source
-            media="(max-width: 767px)"
-            srcSet="/images/Base_image_mobile.png"
-          />
-          <img
-            src="/images/Base_image_desktop.png"
-            alt=""
-            className="w-full h-full object-cover object-center"
-          />
-        </picture>
-      </div>
-
-      {/* LAYER 2: Liquid Touch Mask & Reveal Canvas */}
+      {/* LAYER 1: Main Canvas (Draws Base Image & Spider-Man Liquid Reveal 1:1 Perfectly Aligned) */}
       <canvas
         ref={mainCanvasRef}
         aria-hidden="true"
         className="absolute inset-0 w-full h-full z-10 pointer-events-none"
       />
 
-      {/* LAYER 3: Interface Chrome & Ambient Technical Metadata */}
+      {/* LAYER 2: Interface Chrome & Ambient Technical Metadata */}
       <div className="absolute inset-0 z-20 flex flex-col justify-between p-6 md:p-12 pointer-events-none animate-chrome-fade">
         {/* TOP CHROME BAR */}
         <header className="w-full flex items-center justify-between pointer-events-auto">

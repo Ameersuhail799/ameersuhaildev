@@ -223,7 +223,7 @@ const GithubActivity = () => {
                 GitHub Activity
               </p>
             </div>
-            <h3 className="mt-1 font-soldier text-[34px] font-bold uppercase leading-none text-[#F6F2FF]">
+            <h3 className="mt-1 font-soldier text-xl sm:text-2xl md:text-[34px] font-bold uppercase leading-tight text-[#F6F2FF] break-words">
               {profile?.name || GITHUB_USERNAME}
             </h3>
           </div>

@@ -45,7 +45,7 @@ const Projects = () => {
               <div className='font-poppins text-[#C9C5D0] font-semibold uppercase lg:text-base text-sm tracking-wider'>
                 <ScrollFloat animationDuration={1} ease='back.inOut(2)' scrollStart='center bottom+=50%' scrollEnd='bottom bottom-=40%' stagger={0.03}>MY PROJECTS</ScrollFloat>
               </div>
-              <div className='font-soldier text-[#F6F2FF] font-semibold lg:text-[64px] text-[42px] leading-[0.9] uppercase lg:mt-5 mt-3'>
+              <div className='font-soldier text-[#F6F2FF] font-semibold text-[26px] sm:text-[38px] md:text-[52px] lg:text-[64px] leading-[1.0] uppercase lg:mt-5 mt-3 break-words'>
                 <ScrollFloat animationDuration={1} ease='back.inOut(2)' scrollStart='center bottom+=70%' scrollEnd='bottom bottom-=40%' stagger={0.03}>Selected Work</ScrollFloat>
               </div>
             </div>
