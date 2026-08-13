@@ -232,9 +232,8 @@ export function CognitionHero({ onExitIntro, isExiting }) {
         }
       }
 
-      // Touch liquid head radius
-      const isCoarse = ptr.pointerType === "touch" || ptr.pointerType === "pen" || isMobile;
-      const headRadius = (isCoarse ? 65 : 100) * dpr;
+      // Touch liquid head radius (Desktop stays at 100, Mobile increased to 150 for larger touch reveal)
+      const headRadius = (isMobile ? 150 : 100) * dpr;
 
       // 1. Render offscreen field mask
       const fw = fieldCanvas.width;
