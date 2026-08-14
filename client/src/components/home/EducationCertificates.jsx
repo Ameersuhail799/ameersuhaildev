@@ -247,6 +247,32 @@ const EducationCertificates = () => {
           ))}
         </div>
 
+        {/* ── BOTTOM CTA BANNER: VIEW ALL CERTIFICATES ON GITHUB ── */}
+        <div className="mt-12 lg:mt-16 flex flex-col items-center justify-center text-center rounded-[26px] border border-white/10 bg-gradient-to-r from-[#16141a] via-[#0f0e11] to-[#16141a] p-8 sm:p-12 shadow-[0_22px_70px_rgba(0,0,0,0.5)]">
+          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#BF4A1A]/30 bg-[#BF4A1A]/10 text-[#BF4A1A] font-poppins text-xs font-bold uppercase tracking-wider mb-4">
+            <FiAward className="text-sm" />
+            <span>Master Repository Sync</span>
+          </div>
+
+          <h3 className="font-soldier text-2xl sm:text-4xl font-semibold uppercase text-[#F6F2FF] max-w-2xl leading-tight">
+            Explore All 20+ Verified Credentials & Certificates
+          </h3>
+
+          <p className="mt-3 font-poppins text-xs sm:text-sm text-[#C9C5D0]/80 max-w-xl leading-relaxed">
+            View the complete master archive of official certificates, badges, virtual internships, and job simulations hosted on GitHub.
+          </p>
+
+          <a
+            href="https://github.com/Ameersuhail799/ameer-credentials"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-6 group inline-flex min-h-12 items-center gap-3 rounded-full bg-[#BF4A1A] px-7 font-poppins text-xs sm:text-sm font-bold uppercase text-white shadow-[0_10px_30px_rgba(191,74,26,0.3)] transition-all duration-300 hover:bg-[#a33d13] hover:shadow-[0_15px_40px_rgba(191,74,26,0.5)] hover:scale-[1.02]"
+          >
+            <span>View All Certificates on GitHub</span>
+            <FiArrowUpRight className="text-base transition duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+          </a>
+        </div>
+
       </div>
 
       {/* ── INTERACTIVE EXPANDED CERTIFICATE LIGHTBOX MODAL ── */}
