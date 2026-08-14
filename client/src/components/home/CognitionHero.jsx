@@ -14,8 +14,7 @@ export function CognitionHero({ onExitIntro, isExiting }) {
   });
 
   const [imagesLoaded, setImagesLoaded] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
-  const [discoveryState, setDiscoveryState] = useState("explore"); // 'explore' -> 'detected' -> 'ready'
+  const [hasTouchedPhoto, setHasTouchedPhoto] = useState(false);
   const isMobileRef = useRef(false);
 
   // Animation & Liquid simulation refs
@@ -75,14 +74,10 @@ export function CognitionHero({ onExitIntro, isExiting }) {
     };
   }, []);
 
-  // Track interaction to progress discovery state message
-  const triggerInteractionState = () => {
-    if (!hasInteracted) {
-      setHasInteracted(true);
-      setDiscoveryState("detected");
-      setTimeout(() => {
-        setDiscoveryState("ready");
-      }, 1000);
+  // Track interaction to dismiss floating hint badge
+  const triggerInteraction = () => {
+    if (!hasTouchedPhoto) {
+      setHasTouchedPhoto(true);
     }
   };
 
@@ -105,7 +100,7 @@ export function CognitionHero({ onExitIntro, isExiting }) {
     };
 
     const handleTouchStart = (e) => {
-      triggerInteractionState();
+      triggerInteraction();
       if (e.touches && e.touches.length > 0) {
         touchStartY = e.touches[0].clientY;
       }
@@ -131,7 +126,7 @@ export function CognitionHero({ onExitIntro, isExiting }) {
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [imagesLoaded, isExiting, onExitIntro]);
+  }, [imagesLoaded, isExiting, onExitIntro, hasTouchedPhoto]);
 
   // Main Canvas Rendering Loop with 100% Guaranteed 1:1 Image Alignment on Mobile & Desktop
   useEffect(() => {
@@ -320,7 +315,7 @@ export function CognitionHero({ onExitIntro, isExiting }) {
 
   // Pointer & Touch Handlers
   const handlePointerEnter = (e) => {
-    triggerInteractionState();
+    triggerInteraction();
     if (e.pointerType === "mouse") {
       const rect = e.currentTarget.getBoundingClientRect();
       const dpr = dprRef.current;
@@ -345,7 +340,7 @@ export function CognitionHero({ onExitIntro, isExiting }) {
   };
 
   const handlePointerMove = (e) => {
-    triggerInteractionState();
+    triggerInteraction();
     const rect = e.currentTarget.getBoundingClientRect();
     const dpr = dprRef.current;
     const px = (e.clientX - rect.left) * dpr;
@@ -376,7 +371,7 @@ export function CognitionHero({ onExitIntro, isExiting }) {
 
   // Mobile Touch Handlers
   const handlePointerDown = (e) => {
-    triggerInteractionState();
+    triggerInteraction();
     const rect = e.currentTarget.getBoundingClientRect();
     const dpr = dprRef.current;
     const px = (e.clientX - rect.left) * dpr;
@@ -438,6 +433,20 @@ export function CognitionHero({ onExitIntro, isExiting }) {
         aria-hidden="true"
         className="absolute inset-0 w-full h-full z-10 pointer-events-none"
       />
+
+      {/* FLOATING INTERACTIVE LIQUID TOUCH HINT BADGE (Option 1) */}
+      <div
+        className={`absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none transition-all duration-500 ${
+          hasTouchedPhoto ? "opacity-0 scale-95" : "opacity-100 scale-100"
+        }`}
+      >
+        <div className="flex items-center gap-2.5 px-4 py-2 rounded-full border border-[#BF4A1A]/40 bg-[#0f0e11]/85 backdrop-blur-md shadow-[0_10px_35px_rgba(191,74,26,0.35)] animate-bounce">
+          <span className="flex size-2 rounded-full bg-[#BF4A1A] animate-ping" />
+          <span className="font-mono-custom text-[10px] sm:text-xs uppercase tracking-[0.2em] font-semibold text-[#F6F2FF] whitespace-nowrap">
+            ✨ HOVER OR TOUCH PHOTO TO REVEAL MASK
+          </span>
+        </div>
+      </div>
 
       {/* LAYER 2: Interface Chrome & Ambient Technical Metadata */}
       <div className="absolute inset-0 z-20 flex flex-col justify-between p-6 md:p-12 pointer-events-none animate-chrome-fade">
