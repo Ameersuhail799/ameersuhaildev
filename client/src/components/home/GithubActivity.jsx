@@ -6,52 +6,54 @@ const GITHUB_USERNAME = 'ameersuhail799'
 const GITHUB_PROFILE = `https://github.com/${GITHUB_USERNAME}`
 
 const KNOWN_SCORES = {
-  // June Week 1
+  // June
+  '2026-06-11': 1,
+  '2026-06-13': 3,
+  '2026-06-14': 1,
+  '2026-06-15': 1,
+  '2026-06-17': 1,
   '2026-06-18': 3,
   '2026-06-20': 4,
-  // June Week 2
-  '2026-06-21': 1,
-  '2026-06-22': 1,
   '2026-06-23': 4,
   '2026-06-24': 4,
   '2026-06-25': 3,
   '2026-06-26': 4,
-  '2026-06-27': 1,
-  // June Week 3
-  '2026-06-29': 3,
-  '2026-07-04': 3,
-  // July Week 2
+  // July
   '2026-07-14': 1,
   '2026-07-15': 1,
-  '2026-07-16': 1,
-  // July Week 3
-  '2026-07-19': 1,
-  '2026-07-20': 1,
-  '2026-07-21': 1,
-  // August Week 1
-  '2026-08-04': 3,
-  '2026-08-05': 4,
-  '2026-08-06': 3,
+  '2026-07-28': 2,
+  '2026-07-29': 2,
+  '2026-07-30': 1,
+  '2026-07-31': 2,
+  // August
+  '2026-08-01': 1,
+  '2026-08-05': 2,
+  '2026-08-06': 1,
   '2026-08-07': 4,
-  '2026-08-08': 2,
-  // August Week 2
+  '2026-08-08': 1,
   '2026-08-11': 4,
   '2026-08-12': 5,
+  '2026-08-13': 8,
+  '2026-08-14': 6,
+  '2026-08-15': 3,
 }
 
 const INITIAL_PROFILE = {
   name: 'AMEER SUHAIL K T',
-  public_repos: 12,
+  public_repos: 11,
   followers: 5,
-  avatar_url: 'https://avatars.githubusercontent.com/u/150937799?v=4'
+  avatar_url: 'https://avatars.githubusercontent.com/u/195453600?v=4'
 }
 
 const INITIAL_COMMITS = [
-  { sha: 'a3f1b2c', repo: 'ameer_portfolio', message: 'feat: updated github contribution grid & logo', time: '1h ago', url: 'https://github.com/Ameersuhail799/ameer_portfolio' },
-  { sha: '7b9c2e1', repo: 'AlphaForge', message: 'feat: updated model pipeline and API routes', time: '5h ago', url: 'https://github.com/Ameersuhail799/AlphaForge' },
-  { sha: '4d8e3f9', repo: 'careeros', message: 'feat: ATS resume analyzer integration', time: '1d ago', url: 'https://github.com/Ameersuhail799/careeros' },
-  { sha: '1c5e9a2', repo: 'apms-activity-points', message: 'fix: student dashboard activity points counter', time: '2d ago', url: 'https://github.com/Ameersuhail799/apms-activity-points' },
-  { sha: '9e2b1f8', repo: 'dotme-style-spot', message: 'feat: e-commerce product catalog and filter', time: '3d ago', url: 'https://github.com/Ameersuhail799/dotme-style-spot' },
+  { sha: 'a518bfb', repo: 'ameersuhaildev', message: 'chore: remove unused redundant backup images & clean repository', time: '1d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/a518bfb' },
+  { sha: '61ec5fa', repo: 'ameersuhaildev', message: 'feat: add interactive floating liquid touch hint badge', time: '1d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/61ec5fa' },
+  { sha: '5557dbb', repo: 'ameersuhaildev', message: 'feat: add bottom CTA banner to view all 20+ certificates on GitHub', time: '1d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/5557dbb' },
+  { sha: 'ccbe031', repo: 'ameersuhaildev', message: 'fix: 1:1 image mask alignment in CognitionHero & mobile text wrap', time: '1d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/ccbe031' },
+  { sha: 'c7c5307', repo: 'ameersuhaildev', message: 'style: increase mobile liquid touch radius to 150', time: '1d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/c7c5307' },
+  { sha: '3460d3d', repo: 'ameersuhaildev', message: 'feat: update banner headline to Option 1 Modern AI-First Engineer', time: '1d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/3460d3d' },
+  { sha: '3fe18c8', repo: 'ameersuhaildev', message: 'perf: pre-mount portfolio for zero transition lag', time: '1d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/3fe18c8' },
+  { sha: '851d6e5', repo: 'ameersuhaildev', message: 'feat: complete portfolio updates, certificates integration & projects', time: '2d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/851d6e5' },
 ]
 
 const timeAgo = (dateString) => {
@@ -147,7 +149,7 @@ const GithubActivity = () => {
             }
           })
           if (parsedCommits.length > 0) {
-            setCommits(parsedCommits.slice(0, 7))
+            setCommits(parsedCommits.slice(0, 8))
           }
         }
 
@@ -199,9 +201,9 @@ const GithubActivity = () => {
 
   const activityStats = useMemo(() => {
     return [
-      { label: 'Public repos', value: profile?.public_repos ?? 12, icon: <FiGitBranch /> },
+      { label: 'Public repos', value: profile?.public_repos ?? 11, icon: <FiGitBranch /> },
       { label: 'Followers', value: profile?.followers ?? 5, icon: <FiUsers /> },
-      { label: 'Recent commits', value: commits.length || 7, icon: <FiGitCommit /> },
+      { label: 'Recent commits', value: commits.length || 8, icon: <FiGitCommit /> },
     ]
   }, [profile, commits])
 
