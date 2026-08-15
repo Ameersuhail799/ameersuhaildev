@@ -94,28 +94,30 @@ export const Skills = () => {
   return (
     <section className="md:pt-20 pt-25">
       <div className="container">
-        <div className="font-poppins text-Primary font-semibold lg:text-2xl text-lg text-center">
-          <ScrollFloat
-            animationDuration={1}
-            ease="back.inOut(2)"
-            scrollStart="center bottom+=80%"
-            scrollEnd="bottom bottom-=80%"
-            stagger={0.03}
-          >
-            MY SKILLS
-          </ScrollFloat>
+        <div id="SkillsHeader" className="text-center py-4 bg-[#030304] text-[#F6F2FF]">
+          <div className="font-poppins text-[#C9C5D0] font-semibold lg:text-2xl text-lg text-center">
+            <ScrollFloat
+              animationDuration={1}
+              ease="back.inOut(2)"
+              scrollStart="center bottom+=80%"
+              scrollEnd="bottom bottom-=80%"
+              stagger={0.03}
+            >
+              MY SKILLS
+            </ScrollFloat>
+          </div>
+          <h2 className="font-soldier text-[#F6F2FF] font-medium lg:text-5xl text-[30px] uppercase text-center">
+            <ScrollFloat
+              animationDuration={1}
+              ease="back.inOut(2)"
+              scrollStart="center bottom+=30%"
+              scrollEnd="bottom bottom-=60%"
+              stagger={0.03}
+            >
+              Technologies & expertise
+            </ScrollFloat>
+          </h2>
         </div>
-        <h2 className="font-soldier text-Primary font-medium lg:text-5xl text-[30px] uppercase text-center">
-          <ScrollFloat
-            animationDuration={1}
-            ease="back.inOut(2)"
-            scrollStart="center bottom+=30%"
-            scrollEnd="bottom bottom-=60%"
-            stagger={0.03}
-          >
-            Technologies & expertise
-          </ScrollFloat>
-        </h2>
 
         <div className="md:mt-14 mt-8 grid items-stretch gap-6 grid-cols-1 xl:grid-cols-[minmax(0,1fr)_minmax(340px,420px)]">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

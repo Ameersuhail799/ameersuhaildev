@@ -19,7 +19,7 @@ const PageBanner = ({ id, kicker, kickerMobile, title, description, scrollTarget
     }
 
     return (
-        <section id={id} className={`relative overflow-hidden bg-[#030304] text-[#F6F2FF] ${className}`}>
+        <section id={id || 'Banner'} className={`page-banner-dark relative overflow-hidden bg-[#030304] text-[#F6F2FF] ${className}`}>
             <div className="pointer-events-none absolute inset-0 -z-10">
                 <div className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-coffee/15 blur-3xl" />
             </div>

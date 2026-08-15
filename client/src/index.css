@@ -325,51 +325,65 @@ a.bg-\[\#BF4A1A\] {
 }
 
 /* ==========================================================================
-   PERMANENT DARK SECTIONS LOCK (About Me, Page Banners, Intro & Loader, GitHub)
-   Protect these components from ANY global Light Mode theme overrides!
+   PERMANENT DARK SECTIONS & HEADERS LOCK
+   1. Skills Header: "MY SKILLS / Technologies & expertise" (#SkillsHeader)
+   2. Projects PageBanner: "VIEW MY WORKS / PROJECTS" (#ProjectsBanner)
+   3. Contact PageBanner: "BUILD SOMETHING AMAZING TOGETHER / CONTACT" (#ContactBanner)
+   4. About Section & PageBanner (#About_Me / #AboutMeText / #AboutBanner)
+   5. GitHub Section (.github-activity)
    ========================================================================== */
-#About_Me,
-#AboutMeText,
+#SkillsHeader,
+#ProjectsBanner,
+#ContactBanner,
 #AboutBanner,
+#AboutMeText,
+#About_Me,
+.page-banner-dark,
 .github-activity {
   background-color: #030304 !important;
   color: #F6F2FF !important;
 }
 
-#About_Me h2,
-#About_Me h3,
-#About_Me p,
-#About_Me span:not(.text-coffee),
-#AboutMeText h2,
-#AboutMeText h3,
-#AboutMeText p,
-#AboutMeText span:not(.text-coffee),
-#AboutBanner h2,
-#AboutBanner h3,
-#AboutBanner p,
-.github-activity h3,
-.github-activity p,
-.github-activity span:not(.text-coffee) {
-  color: inherit !important;
+#SkillsHeader *,
+#ProjectsBanner *,
+#ContactBanner *,
+#AboutBanner *,
+#AboutMeText *,
+#About_Me *,
+.page-banner-dark *,
+.github-activity * {
+  color: inherit;
 }
 
-#About_Me .text-\[\#F6F2FF\],
-#AboutMeText .text-\[\#F6F2FF\],
+#SkillsHeader .text-\[\#F6F2FF\],
+#ProjectsBanner .text-\[\#F6F2FF\],
+#ContactBanner .text-\[\#F6F2FF\],
 #AboutBanner .text-\[\#F6F2FF\],
+#AboutMeText .text-\[\#F6F2FF\],
+#About_Me .text-\[\#F6F2FF\],
+.page-banner-dark .text-\[\#F6F2FF\],
 .github-activity .text-\[\#F6F2FF\] {
   color: #F6F2FF !important;
 }
 
-#About_Me .text-\[\#C9C5D0\],
-#AboutMeText .text-\[\#C9C5D0\],
+#SkillsHeader .text-\[\#C9C5D0\],
+#ProjectsBanner .text-\[\#C9C5D0\],
+#ContactBanner .text-\[\#C9C5D0\],
 #AboutBanner .text-\[\#C9C5D0\],
+#AboutMeText .text-\[\#C9C5D0\],
+#About_Me .text-\[\#C9C5D0\],
+.page-banner-dark .text-\[\#C9C5D0\],
 .github-activity .text-\[\#C9C5D0\] {
   color: #C9C5D0 !important;
 }
 
-#About_Me .text-white,
-#AboutMeText .text-white,
+#SkillsHeader .text-white,
+#ProjectsBanner .text-white,
+#ContactBanner .text-white,
 #AboutBanner .text-white,
+#AboutMeText .text-white,
+#About_Me .text-white,
+.page-banner-dark .text-white,
 .github-activity .text-white {
   color: #FFFFFF !important;
 }
