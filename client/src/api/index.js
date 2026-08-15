@@ -48,7 +48,27 @@ const categoryServices = {
 
 const contactServices = {
     sendContact: async (data) => {
-        const res = await api.post("/contact/send", data);
+        const accessKey = import.meta.env.VITE_WEB3FORMS_KEY;
+        if (accessKey) {
+            const res = await axios.post("https://api.web3forms.com/submit", {
+                access_key: accessKey,
+                name: data.name,
+                email: data.email,
+                subject: `Portfolio Inquiry: ${data.subject}`,
+                message: data.message,
+                from_name: "Ameer Suhail Portfolio",
+            });
+            return res.data;
+        }
+
+        // Direct email submission to ameersuhail81570@gmail.com
+        const res = await axios.post("https://formsubmit.co/ajax/ameersuhail81570@gmail.com", {
+            name: data.name,
+            email: data.email,
+            _subject: `Portfolio Inquiry: ${data.subject}`,
+            message: data.message,
+            _template: "table",
+        });
         return res.data;
     },
     getContacts: async ({ page = 1, limit = 8 } = {}) => {
