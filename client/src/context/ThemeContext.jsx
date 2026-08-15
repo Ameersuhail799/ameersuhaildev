@@ -24,7 +24,7 @@ export const ThemeProvider = ({ children }) => {
     return 0;
   });
 
-  // Apply --theme-intensity (0.00 to 1.00) to documentElement and sync class attributes
+  // Apply --theme-intensity and contrast-locked variables to root
   const applyIntensity = (val) => {
     const clamped = Math.max(0, Math.min(100, val));
     const normalized = clamped / 100;
@@ -33,7 +33,11 @@ export const ThemeProvider = ({ children }) => {
     root.style.setProperty("--theme-intensity", normalized.toFixed(4));
     root.setAttribute("data-theme-intensity", Math.round(clamped).toString());
 
-    if (clamped >= 50) {
+    // Domain flag: < 50 = Dark Domain, >= 50 = Light Domain
+    const isLightDomain = clamped >= 50;
+    root.style.setProperty("--domain-mode", isLightDomain ? "1" : "0");
+
+    if (isLightDomain) {
       root.classList.add("light");
       root.classList.remove("dark");
     } else {

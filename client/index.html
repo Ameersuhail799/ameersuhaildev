@@ -21,7 +21,9 @@
         var normalized = (intensity / 100).toFixed(4);
         root.style.setProperty('--theme-intensity', normalized);
         root.setAttribute('data-theme-intensity', Math.round(intensity).toString());
-        if (intensity >= 50) {
+        var isLight = intensity >= 50;
+        root.style.setProperty('--domain-mode', isLight ? '1' : '0');
+        if (isLight) {
           root.classList.add('light');
           root.classList.remove('dark');
         } else {
@@ -30,6 +32,7 @@
         }
       } catch (e) {
         document.documentElement.style.setProperty('--theme-intensity', '0');
+        document.documentElement.style.setProperty('--domain-mode', '0');
         document.documentElement.classList.add('dark');
       }
     })();
