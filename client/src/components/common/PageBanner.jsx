@@ -19,7 +19,7 @@ const PageBanner = ({ id, kicker, kickerMobile, title, description, scrollTarget
     }
 
     return (
-        <section id={id} className={`relative overflow-hidden ${className}`}>
+        <section id={id} className={`relative overflow-hidden bg-[#030304] text-[#F6F2FF] ${className}`}>
             <div className="pointer-events-none absolute inset-0 -z-10">
                 <div className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-coffee/15 blur-3xl" />
             </div>
@@ -30,32 +30,32 @@ const PageBanner = ({ id, kicker, kickerMobile, title, description, scrollTarget
                         {socials.map(({ label, href, icon: Icon }) => (
                             <Magnet key={label} padding={20} disabled={false} magnetStrength={2}>
                                 <a target='_blank' rel='noreferrer' href={href} aria-label={`Visit my ${label} profile`}>
-                                    <Icon className='text-[18px] text-[var(--text-secondary)] hover-brown' />
+                                    <Icon className='text-[18px] text-[#C9C5D0] hover:text-[#BF4A1A] transition-colors' />
                                 </a>
                             </Magnet>
                         ))}
                     </div>
                     {/* -----Center Text------- */}
                     <div className='mb-[120px]'>
-                        <p className='font-poppins uppercase text-lg text-[var(--text-secondary)] tracking-wide font-medium text-center md:flex hidden items-center justify-center gap-3' data-aos="fade-up" data-aos-duration="600" data-aos-easing="ease-out-cubic">
+                        <p className='font-poppins uppercase text-lg text-[#C9C5D0] tracking-wide font-medium text-center md:flex hidden items-center justify-center gap-3' data-aos="fade-up" data-aos-duration="600" data-aos-easing="ease-out-cubic">
                             <span className='h-px w-8 bg-coffee/60'></span>
                             {kicker}
                             <span className='h-px w-8 bg-coffee/60'></span>
                         </p>
-                        <p className='font-poppins uppercase text-lg text-[var(--text-secondary)] tracking-wide font-medium text-center md:hidden block' data-aos="fade-up" data-aos-duration="600" data-aos-easing="ease-out-cubic">{kickerMobile || kicker}</p>
-                        <h2 className='font-soldier text-[var(--text-primary)] lg:leading-[130%] font-medium lg:text-[180px] text-[70px] text-center' data-aos="fade-up" data-aos-duration="700" data-aos-delay="120" data-aos-easing="ease-out-cubic">{title}</h2>
-                        <p className='font-poppins uppercase lg:text-lg text-base text-[var(--text-secondary)] tracking-wide font-medium text-center mx-auto w-full' data-aos="fade-up" data-aos-duration="700" data-aos-delay="280" data-aos-easing="ease-out-cubic">
+                        <p className='font-poppins uppercase text-lg text-[#C9C5D0] tracking-wide font-medium text-center md:hidden block' data-aos="fade-up" data-aos-duration="600" data-aos-easing="ease-out-cubic">{kickerMobile || kicker}</p>
+                        <h2 className='font-soldier text-[#F6F2FF] lg:leading-[130%] font-medium lg:text-[180px] text-[70px] text-center' data-aos="fade-up" data-aos-duration="700" data-aos-delay="120" data-aos-easing="ease-out-cubic">{title}</h2>
+                        <p className='font-poppins uppercase lg:text-lg text-base text-[#C9C5D0] tracking-wide font-medium text-center mx-auto w-full' data-aos="fade-up" data-aos-duration="700" data-aos-delay="280" data-aos-easing="ease-out-cubic">
                             <span className={`block mx-auto w-full ${descriptionWidth}`}>{description}</span>
                         </p>
                     </div>
                     {/* -----Scroll To Explore------- */}
                     <a href={scrollTarget} onClick={handleScroll} aria-label='Scroll to explore' className='group absolute right-0 bottom-0 cursor-pointer' data-aos="fade-up" data-aos-duration="600" data-aos-delay="550" data-aos-easing="ease-out-cubic">
                         <div className='lg:block hidden'>
-                            <CircularText text=" SCROLL TO EXPLORE ✦ SCROLL TO EXPLORE  ✦ " onHover="speedUp" spinDuration={20} className="custom-class z-10" />
+                            <CircularText text=" SCROLL TO EXPLORE ✦ SCROLL TO EXPLORE  ✦ " onHover="speedUp" spinDuration={20} className="custom-class z-10 text-[#F6F2FF]" />
                         </div>
-                        <div className='lg:hidden flex size-12 items-center justify-center rounded-full border border-[var(--border-main)]'></div>
+                        <div className='lg:hidden flex size-12 items-center justify-center rounded-full border border-white/20'></div>
                         <div className="absolute inset-0 flex items-center justify-center">
-                            <FaArrowDown className="text-xl text-[var(--text-primary)] animate-bounce [animation-duration:1.8s] transition-colors duration-300 group-hover:text-coffee" />
+                            <FaArrowDown className="text-xl text-[#F6F2FF] animate-bounce [animation-duration:1.8s] transition-colors duration-300 group-hover:text-coffee" />
                         </div>
                     </a>
                     <div></div>
