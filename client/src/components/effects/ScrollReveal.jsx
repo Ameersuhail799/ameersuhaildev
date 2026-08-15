@@ -12,7 +12,7 @@ const ScrollReveal = ({
 }) => {
   const containerRef = useRef(null);
 
-  // ✅ split text but keep existing JSX (like your <span className="text-coffee">)
+  // Split text but keep existing JSX intact
   const splitChildren = useMemo(() => {
     const processNode = (node) => {
       if (typeof node === "string") {
@@ -24,7 +24,7 @@ const ScrollReveal = ({
           )
         );
       }
-      return node; // keep JSX elements intact
+      return node;
     };
 
     return Array.isArray(children)
@@ -43,9 +43,9 @@ const ScrollReveal = ({
 
     gsap.fromTo(
       wordElements,
-      { color: "#B3B2AD" },
+      { opacity: 0.3 },
       {
-        color: "#212121",
+        opacity: 1,
         ease: "none",
         stagger: 0.8,
         scrollTrigger: {

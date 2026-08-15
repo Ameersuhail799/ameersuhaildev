@@ -18,7 +18,7 @@ const ExploreMyWork = () => {
                     <Magnet padding={5} magnetStrength={30}>
                         <Link to={'/projects'} className='hover-brown transition-trigger relative w-[200px] h-[200px] rounded-full border-1 border-coffee mt-10 flex items-center justify-center rotate-[-25deg] cursor-pointer hover:rotate-0 hover:bg-coffee duration-[.3s] group'>
                             <span className='absolute top-[-15px] left-0 w-full h-[200px] rotate-[-85deg] group-hover:rotate-0 group-hover:top-0 duration-[.3s] rounded-full border-1 border-coffee'></span>
-                            <p className='text-4xl text-second text-center font-soldier group-hover:text-brand duration-[.3s]'>Explore <br /> my Work</p>
+                            <p className='text-4xl text-[var(--text-secondary)] text-center font-soldier group-hover:text-coffee duration-[.3s]'>Explore <br /> my Work</p>
                         </Link>
                     </Magnet>
                     <p data-aos="fade-up" className='font-poppins text-second lg:text-xl text-lg lg:w-[400px] uppercase mt-10'>Explore my creative journey, where passion meets the art of crafting engaging digital experiences.</p>

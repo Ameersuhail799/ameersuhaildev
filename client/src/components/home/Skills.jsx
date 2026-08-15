@@ -87,7 +87,7 @@ const SkillIcon = ({ skill }) => {
   }
 
   const Icon = skill.icon || FiGlobe
-  return <Icon aria-hidden="true" className="size-4 text-[#F6F2FF]" />
+  return <Icon aria-hidden="true" className="size-4 text-coffee" />
 }
 
 export const Skills = () => {
