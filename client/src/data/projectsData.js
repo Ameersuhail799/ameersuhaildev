@@ -32,7 +32,7 @@ export const defaultProjects = [
     type: "Full Stack / Web App",
     description: "My previous personal developer portfolio website built with dark grid aesthetics, custom bio hero, skill badges, live repository sync, and modern UI micro-interactions.",
     technologies: ["Next.js 14", "React 18", "TypeScript", "Tailwind CSS", "PyTorch & AI"],
-    liveLink: "https://ameer-portfolio.vercel.app/",
+    liveLink: "https://ameer-portfolio-khaki.vercel.app/",
     githubRepo: "https://github.com/Ameersuhail799/ameer-portfolio.git",
     thumbnail: portfolioV1Img,
     featured: true
