@@ -1,12 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext({
-  themeIntensity: 0,
+  themeIntensity: 50,
   setThemeIntensity: () => {},
 });
 
 export const ThemeProvider = ({ children }) => {
-  // Canonical numeric theme intensity state (0 to 100, default 0)
+  // Canonical numeric theme intensity state (0 to 100, default 50)
   const [themeIntensity, setIntensityState] = useState(() => {
     if (typeof window !== "undefined") {
       try {
@@ -21,7 +21,7 @@ export const ThemeProvider = ({ children }) => {
         if (legacyTheme === "dark") return 0;
       } catch (e) {}
     }
-    return 0;
+    return 50;
   });
 
   // Apply continuous progress variables (--dark-progress & --light-progress) to root
