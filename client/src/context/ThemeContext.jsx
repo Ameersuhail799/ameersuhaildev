@@ -1,40 +1,63 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext({
-  theme: "dark",
-  toggleTheme: () => {},
+  themeIntensity: 0,
+  setThemeIntensity: () => {},
 });
 
 export const ThemeProvider = ({ children }) => {
-  // Initialize theme synchronously from DOM or localStorage (default 'dark')
-  const [theme, setTheme] = useState(() => {
+  // Canonical numeric theme intensity state (0 to 100, default 0)
+  const [themeIntensity, setIntensityState] = useState(() => {
     if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("theme");
-      if (saved === "light") return "light";
+      try {
+        const savedIntensity = localStorage.getItem("themeIntensity");
+        if (savedIntensity !== null) {
+          const num = Number(savedIntensity);
+          if (!isNaN(num) && num >= 0 && num <= 100) return num;
+        }
+        // Legacy fallback migration
+        const legacyTheme = localStorage.getItem("theme");
+        if (legacyTheme === "light") return 100;
+        if (legacyTheme === "dark") return 0;
+      } catch (e) {}
     }
-    return "dark";
+    return 0;
   });
 
-  // Apply theme to document element synchronously and save preference
-  useEffect(() => {
+  // Apply --theme-intensity (0.00 to 1.00) to documentElement and sync class attributes
+  const applyIntensity = (val) => {
+    const clamped = Math.max(0, Math.min(100, val));
+    const normalized = clamped / 100;
     const root = document.documentElement;
-    if (theme === "light") {
+
+    root.style.setProperty("--theme-intensity", normalized.toFixed(4));
+    root.setAttribute("data-theme-intensity", Math.round(clamped).toString());
+
+    if (clamped >= 50) {
       root.classList.add("light");
       root.classList.remove("dark");
-      localStorage.setItem("theme", "light");
     } else {
       root.classList.add("dark");
       root.classList.remove("light");
-      localStorage.setItem("theme", "dark");
     }
-  }, [theme]);
+  };
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  useEffect(() => {
+    applyIntensity(themeIntensity);
+    try {
+      localStorage.setItem("themeIntensity", themeIntensity.toString());
+    } catch (e) {}
+  }, [themeIntensity]);
+
+  const setThemeIntensity = (value) => {
+    const nextVal = typeof value === "function" ? value(themeIntensity) : value;
+    const clamped = Math.max(0, Math.min(100, nextVal));
+    setIntensityState(clamped);
+    applyIntensity(clamped);
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ themeIntensity, setThemeIntensity }}>
       {children}
     </ThemeContext.Provider>
   );

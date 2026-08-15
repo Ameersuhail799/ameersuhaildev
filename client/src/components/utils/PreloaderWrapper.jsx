@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PortfolioLoader from "../common/PortfolioLoader";
 import CognitionHero from "../home/CognitionHero";
+import ThemeIntensityController from "../common/ThemeIntensityController";
 
 const PreloaderWrapper = ({ children }) => {
   // State machine: 'loading' -> 'exiting_loading' -> 'intro' -> 'entering_portfolio' -> 'portfolio'
@@ -74,6 +75,9 @@ const PreloaderWrapper = ({ children }) => {
       >
         {children}
       </div>
+
+      {/* ── THEME INTENSITY CONTROLLER (Appears ONLY after Loader & Cognitive Intro complete) ── */}
+      {entryState === "portfolio" && <ThemeIntensityController />}
     </>
   );
 };

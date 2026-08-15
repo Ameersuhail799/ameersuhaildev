@@ -1,44 +1,34 @@
 /* -------Tailwind------ */
 @import "tailwindcss";
 
-/* ----------Themes & Centralized Design Tokens-------- */
-:root, html.dark {
-  --bg-main: #030304;
-  --bg-card: #0f0e11;
-  --bg-card-hover: #17151a;
-  --bg-elevated: #16141a;
-  --bg-subtle: rgba(255, 255, 255, 0.05);
-  --border-main: rgba(255, 255, 255, 0.15);
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --text-primary: #F6F2FF;
-  --text-secondary: #C9C5D0;
-  --text-muted: rgba(201, 197, 208, 0.6);
-  --accent-crimson: #BF4A1A;
-  --accent-crimson-hover: #a33d13;
-  --shadow-card: 0 28px 70px rgba(0, 0, 0, 0.4);
-}
+/* ----------Themes & Centralized Design Tokens (Phase 2 Continuous 0-100% System)-------- */
+:root {
+  --theme-intensity: 0; /* Normalized 0.00 to 1.00 */
 
-html.light {
-  --bg-main: #F4F3F7;
-  --bg-card: #FFFFFF;
-  --bg-card-hover: #F8F7FC;
-  --bg-elevated: #EDEBF2;
-  --bg-subtle: rgba(0, 0, 0, 0.04);
-  --border-main: rgba(0, 0, 0, 0.12);
-  --border-subtle: rgba(0, 0, 0, 0.06);
-  --text-primary: #121118;
-  --text-secondary: #403C4D;
-  --text-muted: #5C576C;
+  /* Continuous Color Tokens using CSS color-mix() */
+  --bg-main: color-mix(in srgb, #030304 calc((1 - var(--theme-intensity)) * 100%), #F4F3F7 calc(var(--theme-intensity) * 100%));
+  --bg-card: color-mix(in srgb, #0f0e11 calc((1 - var(--theme-intensity)) * 100%), #FFFFFF calc(var(--theme-intensity) * 100%));
+  --bg-card-hover: color-mix(in srgb, #17151a calc((1 - var(--theme-intensity)) * 100%), #F8F7FC calc(var(--theme-intensity) * 100%));
+  --bg-elevated: color-mix(in srgb, #16141a calc((1 - var(--theme-intensity)) * 100%), #EDEBF2 calc(var(--theme-intensity) * 100%));
+  --bg-subtle: color-mix(in srgb, rgba(255, 255, 255, 0.05) calc((1 - var(--theme-intensity)) * 100%), rgba(0, 0, 0, 0.04) calc(var(--theme-intensity) * 100%));
+
+  --border-main: color-mix(in srgb, rgba(255, 255, 255, 0.15) calc((1 - var(--theme-intensity)) * 100%), rgba(0, 0, 0, 0.12) calc(var(--theme-intensity) * 100%));
+  --border-subtle: color-mix(in srgb, rgba(255, 255, 255, 0.08) calc((1 - var(--theme-intensity)) * 100%), rgba(0, 0, 0, 0.06) calc(var(--theme-intensity) * 100%));
+
+  --text-primary: color-mix(in srgb, #F6F2FF calc((1 - var(--theme-intensity)) * 100%), #121118 calc(var(--theme-intensity) * 100%));
+  --text-secondary: color-mix(in srgb, #C9C5D0 calc((1 - var(--theme-intensity)) * 100%), #403C4D calc(var(--theme-intensity) * 100%));
+  --text-muted: color-mix(in srgb, rgba(201, 197, 208, 0.6) calc((1 - var(--theme-intensity)) * 100%), #5C576C calc(var(--theme-intensity) * 100%));
+
   --accent-crimson: #BF4A1A;
   --accent-crimson-hover: #a33d13;
-  --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.08);
+  --shadow-card: color-mix(in srgb, rgba(0, 0, 0, 0.4) calc((1 - var(--theme-intensity)) * 100%), rgba(0, 0, 0, 0.08) calc(var(--theme-intensity) * 100%));
 }
 
 @theme {
   --font-poppins: "Poppins", "sans-serif";
   --font-soldier: "Big Shoulders", "sans-serif";
-  --color-Primary: #F6F2FF;
-  --color-second: #C9C5D0;
+  --color-Primary: var(--text-primary);
+  --color-second: var(--text-secondary);
   --color-borderCol: #333332;
   --color-brand: #030304;
   --color-coffee: #BF4A1A;
@@ -167,7 +157,7 @@ html.light {
   }
 }
 
-/* ------- Portfolio Theme Aware Backgrounds ------- */
+/* ------- Portfolio Theme Aware Backgrounds & Controls ------- */
 html, body {
   background-color: var(--bg-main) !important;
   color: var(--text-primary);
@@ -177,109 +167,113 @@ html.portfolio-active, body.portfolio-active {
   background-color: var(--bg-main) !important;
 }
 
-/* Logo Visibility Fix in Light Mode (Problems 1 & 2) */
-html.light img[src*="Logo.png"],
-html.light img[src*="ResLogo"] {
-  filter: brightness(0.12) drop-shadow(0 2px 10px rgba(0, 0, 0, 0.15)) !important;
+/* Logo Visibility Filter Continuous Scaling (0% -> 100%) */
+img[src*="Logo.png"],
+img[src*="ResLogo"] {
+  filter: brightness(calc(1 - 0.88 * var(--theme-intensity))) drop-shadow(0 2px 10px rgba(0, 0, 0, calc(0.15 * var(--theme-intensity)))) !important;
 }
 
-/* Theme Utilities for Light Mode Cards & Containers */
-html.light .bg-\[\#0f0e11\],
-html.light .bg-\[\#17151a\],
-html.light .bg-\[\#16141a\],
-html.light .bg-\[\#030304\],
-html.light footer.bg-\[\#030304\] {
+/* Dynamic Surface Overrides driven by CSS Variables */
+.bg-\[\#0f0e11\],
+.bg-\[\#17151a\],
+.bg-\[\#16141a\],
+.bg-\[\#030304\],
+footer.bg-\[\#030304\] {
   background-color: var(--bg-card) !important;
 }
 
-html.light .bg-white\/5,
-html.light .bg-white\/10 {
-  background-color: rgba(0, 0, 0, 0.04) !important;
+.bg-white\/5,
+.bg-white\/10 {
+  background-color: var(--bg-subtle) !important;
 }
 
-html.light .border-white\/10,
-html.light .border-white\/15,
-html.light .border-white\/20,
-html.light .border-white\/5 {
-  border-color: rgba(0, 0, 0, 0.12) !important;
+.border-white\/10,
+.border-white\/15,
+.border-white\/20,
+.border-white\/5 {
+  border-color: var(--border-main) !important;
 }
 
-/* Text Hierarchy in Light Mode */
-html.light .text-\[\#F6F2FF\],
-html.light h1.text-\[\#F6F2FF\],
-html.light h2.text-\[\#F6F2FF\],
-html.light h3.text-\[\#F6F2FF\] {
-  color: #121118 !important;
+/* Text Hierarchy Continuous Overrides */
+.text-\[\#F6F2FF\],
+h1.text-\[\#F6F2FF\],
+h2.text-\[\#F6F2FF\],
+h3.text-\[\#F6F2FF\] {
+  color: var(--text-primary) !important;
 }
 
-/* Secondary & Description Text in Light Mode (Problems 3 & 4) */
-html.light .text-\[\#C9C5D0\],
-html.light .text-\[\#C9C5D0\]\/60,
-html.light .text-\[\#C9C5D0\]\/70,
-html.light .text-\[\#C9C5D0\]\/80,
-html.light .text-\[\#C9C5D0\]\/90,
-html.light .text-white\/50,
-html.light .text-white\/60,
-html.light .text-white\/70,
-html.light .text-white\/80 {
-  color: #403C4D !important;
+.text-\[\#C9C5D0\],
+.text-\[\#C9C5D0\]\/60,
+.text-\[\#C9C5D0\]\/70,
+.text-\[\#C9C5D0\]\/80,
+.text-\[\#C9C5D0\]\/90,
+.text-white\/50,
+.text-white\/60,
+.text-white\/70,
+.text-white\/80 {
+  color: var(--text-secondary) !important;
 }
 
-html.light .text-white {
-  color: #121118 !important;
+.text-white {
+  color: var(--text-primary) !important;
 }
 
-/* Inputs, Textareas, Select Options in Light Mode */
-html.light input,
-html.light textarea,
-html.light select,
-html.light option {
-  color: #121118 !important;
-  background-color: #FFFFFF !important;
+/* Inputs, Textareas, Select Options in Theme Intensity Engine */
+input,
+textarea,
+select,
+option {
+  color: var(--text-primary) !important;
+  background-color: var(--bg-card) !important;
 }
 
-html.light input::placeholder,
-html.light textarea::placeholder {
-  color: rgba(64, 60, 77, 0.5) !important;
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted) !important;
 }
 
-/* Skills Section Overrides in Light Mode */
-html.light .skill-group,
-html.light .github-activity {
-  background-color: #FFFFFF !important;
-  border-color: rgba(0, 0, 0, 0.12) !important;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08) !important;
+/* Skills Section Overrides */
+.skill-group,
+.github-activity {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-main) !important;
+  box-shadow: var(--shadow-card) !important;
 }
 
-html.light .skill-group__header span {
-  color: #121118 !important;
+.skill-group__header span {
+  color: var(--text-primary) !important;
 }
 
-html.light .skill-group__header p {
-  color: #403C4D !important;
+.skill-group__header p {
+  color: var(--text-secondary) !important;
 }
 
-html.light .skill-pill {
-  background-color: #F4F3F7 !important;
-  color: #121118 !important;
-  border-color: rgba(0, 0, 0, 0.12) !important;
+.skill-pill {
+  background-color: var(--bg-main) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-main) !important;
 }
 
-html.light .skill-pill__icon {
-  background-color: #FFFFFF !important;
+.skill-pill__icon {
+  background-color: var(--bg-card) !important;
 }
 
-/* Master CTA & Gradient Container in Light Mode */
-html.light .bg-gradient-to-r {
-  background-image: linear-gradient(to right, #FFFFFF, #F8F7FC, #FFFFFF) !important;
-  border-color: rgba(0, 0, 0, 0.12) !important;
+/* Master CTA & Gradient Container Continuous Surface */
+.bg-gradient-to-r {
+  background-image: linear-gradient(
+    to right,
+    var(--bg-card),
+    var(--bg-card-hover),
+    var(--bg-card)
+  ) !important;
+  border-color: var(--border-main) !important;
 }
 
-/* Preserve Crisp White Text for Accent Crimson Buttons & Tags in Light Mode */
-html.light .bg-\[\#BF4A1A\],
-html.light .bg-\[\#BF4A1A\] *,
-html.light .bg-\[\#BF4A1A\] span,
-html.light button.bg-\[\#BF4A1A\],
-html.light a.bg-\[\#BF4A1A\] {
+/* Preserve Crisp White Text for Accent Crimson Buttons & Tags Throughout All Intensities */
+.bg-\[\#BF4A1A\],
+.bg-\[\#BF4A1A\] *,
+.bg-\[\#BF4A1A\] span,
+button.bg-\[\#BF4A1A\],
+a.bg-\[\#BF4A1A\] {
   color: #FFFFFF !important;
 }

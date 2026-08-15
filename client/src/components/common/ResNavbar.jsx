@@ -3,8 +3,6 @@ import { Link, useLocation } from 'react-router'
 import ResLogo from "../../assets/images/Logo.png"
 import { FiArrowUpRight, FiHome, FiUser, FiBriefcase, FiMail } from 'react-icons/fi';
 
-import ThemeToggle from './ThemeToggle';
-
 export const ResNavbar = () => {
 
   const [isClosed, setIsClosed] = useState(true)
@@ -40,9 +38,8 @@ export const ResNavbar = () => {
             <img className='w-8 h-auto object-contain filter drop-shadow-[0_0_8px_rgba(246,242,255,0.4)]' src={ResLogo} alt="Logo" />
           </Link>
 
-          {/* ------Nav Menu & Theme Button Group------ */}
+          {/* ------Nav Menu Button------ */}
           <div className='z-[70] flex items-center gap-3' data-aos="fade-down" data-aos-duration="500" data-aos-delay="150" data-aos-easing="ease-out-cubic">
-            <ThemeToggle />
             <button
               onClick={() => setIsClosed(!isClosed)}
               className={`group flex min-h-12 cursor-pointer select-none items-center gap-3 rounded-full border px-4 font-soldier text-xl font-semibold uppercase shadow-[0_14px_34px_rgba(0,0,0,0.3)] backdrop-blur-xl duration-300 ${
@@ -76,7 +73,6 @@ export const ResNavbar = () => {
                   <h2 className='mt-1 font-soldier text-5xl font-semibold uppercase leading-none text-[#F6F2FF]'>Menu</h2>
                 </div>
                 <div className="flex items-center gap-3">
-                  <ThemeToggle />
                   <span className='flex size-11 items-center justify-center rounded-full bg-[#BF4A1A] text-white'>
                     <FiArrowUpRight className='rotate-45' />
                   </span>

@@ -1,13 +1,10 @@
 import React from 'react';
-import Logo from "../../assets/images/Logo.png"
-import { Link } from 'react-router'
+import Logo from "../../assets/images/Logo.png";
+import { Link } from 'react-router';
 import Magnet from '../effects/Magnet';
 import { FiArrowUpRight } from 'react-icons/fi';
 
-import ThemeToggle from './ThemeToggle';
-
 export const Navbar = () => {
-
   return (
     <>
       <nav className='py-5 hidden lg:block text-white'>
@@ -46,9 +43,8 @@ export const Navbar = () => {
               </ul>
             </div>
 
-            {/* ----Theme Toggle & Contact Button---- */}
+            {/* ----Contact Button---- */}
             <div className="flex items-center gap-4">
-              <ThemeToggle />
               <Magnet magnetStrength={2} padding={20}>
                 <div className="magnetic-btn" data-aos="fade-down" data-aos-duration="500" data-aos-delay="420" data-aos-easing="ease-out-cubic">
                   <Link aria-label="Contact Ameer Suhail" to={'/contact'} className='group inline-flex min-h-12 items-center gap-3 rounded-full border border-white/20 px-5 font-poppins text-sm font-semibold uppercase text-[#F6F2FF] hover:text-white transition-trigger transition-link duration-300 hover-this hover:border-[#BF4A1A] hover:bg-[#BF4A1A]'>
@@ -66,3 +62,5 @@ export const Navbar = () => {
     </>
   )
 }
+
+export default Navbar;

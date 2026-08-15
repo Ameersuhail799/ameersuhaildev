@@ -4,19 +4,32 @@
 <head>
   <meta charset="UTF-8" />
 
-  <!-- Synchronous Anti-Flash Theme Initializer (Default: Dark) -->
+  <!-- Synchronous Anti-Flash Theme Intensity Initializer (Default: 0% / Dark) -->
   <script>
     (function() {
       try {
-        var saved = localStorage.getItem('theme');
-        if (saved === 'light') {
-          document.documentElement.classList.add('light');
-          document.documentElement.classList.remove('dark');
+        var intensity = 0;
+        var savedIntensity = localStorage.getItem('themeIntensity');
+        if (savedIntensity !== null) {
+          var num = Number(savedIntensity);
+          if (!isNaN(num) && num >= 0 && num <= 100) intensity = num;
         } else {
-          document.documentElement.classList.add('dark');
-          document.documentElement.classList.remove('light');
+          var legacyTheme = localStorage.getItem('theme');
+          if (legacyTheme === 'light') intensity = 100;
+        }
+        var root = document.documentElement;
+        var normalized = (intensity / 100).toFixed(4);
+        root.style.setProperty('--theme-intensity', normalized);
+        root.setAttribute('data-theme-intensity', Math.round(intensity).toString());
+        if (intensity >= 50) {
+          root.classList.add('light');
+          root.classList.remove('dark');
+        } else {
+          root.classList.add('dark');
+          root.classList.remove('light');
         }
       } catch (e) {
+        document.documentElement.style.setProperty('--theme-intensity', '0');
         document.documentElement.classList.add('dark');
       }
     })();
