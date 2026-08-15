@@ -19,10 +19,14 @@
         }
         var root = document.documentElement;
         var normalized = (intensity / 100).toFixed(4);
+        var darkProgress = Math.min(1, intensity / 50).toFixed(4);
+        var lightProgress = Math.max(0, (intensity - 50) / 50).toFixed(4);
+
         root.style.setProperty('--theme-intensity', normalized);
+        root.style.setProperty('--dark-progress', darkProgress);
+        root.style.setProperty('--light-progress', lightProgress);
         root.setAttribute('data-theme-intensity', Math.round(intensity).toString());
         var isLight = intensity >= 50;
-        root.style.setProperty('--domain-mode', isLight ? '1' : '0');
         if (isLight) {
           root.classList.add('light');
           root.classList.remove('dark');
@@ -32,7 +36,8 @@
         }
       } catch (e) {
         document.documentElement.style.setProperty('--theme-intensity', '0');
-        document.documentElement.style.setProperty('--domain-mode', '0');
+        document.documentElement.style.setProperty('--dark-progress', '0');
+        document.documentElement.style.setProperty('--light-progress', '0');
         document.documentElement.classList.add('dark');
       }
     })();

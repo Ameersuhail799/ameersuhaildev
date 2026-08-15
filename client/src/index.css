@@ -1,21 +1,24 @@
 /* -------Tailwind------ */
 @import "tailwindcss";
 
-/* ----------Themes & Centralized Design Tokens (Phase 2 Contrast-Locked Engine)-------- */
+/* ----------Themes & Centralized Design Tokens (Phase 2 Continuous 0-100% System)-------- */
 :root {
-  --theme-intensity: 0; /* Normalized 0.00 to 1.00 */
+  --theme-intensity: 0;
+  --dark-progress: 0;
+  --light-progress: 0;
 }
 
 /* 
   DARK DOMAIN (0% to 49%):
-  Background transitions smoothly from #030304 -> #1B1824.
+  As slider moves 0% -> 50%, --dark-progress goes from 0.0 -> 1.0.
+  Background transitions smoothly from #030304 -> #252230.
   Text & headings remain CRISP LIGHT (#F6F2FF / #D4D0DD) with WCAG AAA > 12:1 contrast.
 */
 html.dark {
-  --bg-main: color-mix(in srgb, #030304 calc((1 - var(--theme-intensity) * 2) * 100%), #1B1824 calc((var(--theme-intensity) * 2) * 100%));
-  --bg-card: color-mix(in srgb, #0f0e11 calc((1 - var(--theme-intensity) * 2) * 100%), #221F2B calc((var(--theme-intensity) * 2) * 100%));
-  --bg-card-hover: color-mix(in srgb, #17151a calc((1 - var(--theme-intensity) * 2) * 100%), #2B2836 calc((var(--theme-intensity) * 2) * 100%));
-  --bg-elevated: color-mix(in srgb, #16141a calc((1 - var(--theme-intensity) * 2) * 100%), #2A2735 calc((var(--theme-intensity) * 2) * 100%));
+  --bg-main: color-mix(in srgb, #030304 calc((1 - var(--dark-progress)) * 100%), #252230 calc(var(--dark-progress) * 100%));
+  --bg-card: color-mix(in srgb, #0f0e11 calc((1 - var(--dark-progress)) * 100%), #262332 calc(var(--dark-progress) * 100%));
+  --bg-card-hover: color-mix(in srgb, #17151a calc((1 - var(--dark-progress)) * 100%), #2D2A3B calc(var(--dark-progress) * 100%));
+  --bg-elevated: color-mix(in srgb, #16141a calc((1 - var(--dark-progress)) * 100%), #2F2C3D calc(var(--dark-progress) * 100%));
   --bg-subtle: rgba(255, 255, 255, 0.08);
 
   --border-main: rgba(255, 255, 255, 0.16);
@@ -32,14 +35,15 @@ html.dark {
 
 /* 
   LIGHT DOMAIN (50% to 100%):
-  Background transitions smoothly from #E2DFEB -> #F4F3F7.
+  As slider moves 50% -> 100%, --light-progress goes from 0.0 -> 1.0.
+  Background transitions smoothly from soft lavender porcelain (#D6D2E2) -> pure off-white (#F4F3F7).
   Text & headings remain CRISP DARK (#121118 / #3D384B) with WCAG AAA > 12:1 contrast.
 */
 html.light {
-  --bg-main: color-mix(in srgb, #E2DFEB calc((1 - (var(--theme-intensity) - 0.5) * 2) * 100%), #F4F3F7 calc(((var(--theme-intensity) - 0.5) * 2) * 100%));
-  --bg-card: color-mix(in srgb, #F4F2F8 calc((1 - (var(--theme-intensity) - 0.5) * 2) * 100%), #FFFFFF calc(((var(--theme-intensity) - 0.5) * 2) * 100%));
-  --bg-card-hover: color-mix(in srgb, #ECE9F4 calc((1 - (var(--theme-intensity) - 0.5) * 2) * 100%), #F8F7FC calc(((var(--theme-intensity) - 0.5) * 2) * 100%));
-  --bg-elevated: color-mix(in srgb, #E4E1EE calc((1 - (var(--theme-intensity) - 0.5) * 2) * 100%), #EDEBF2 calc(((var(--theme-intensity) - 0.5) * 2) * 100%));
+  --bg-main: color-mix(in srgb, #D6D2E2 calc((1 - var(--light-progress)) * 100%), #F4F3F7 calc(var(--light-progress) * 100%));
+  --bg-card: color-mix(in srgb, #E8E5F2 calc((1 - var(--light-progress)) * 100%), #FFFFFF calc(var(--light-progress) * 100%));
+  --bg-card-hover: color-mix(in srgb, #DFDCED calc((1 - var(--light-progress)) * 100%), #F8F7FC calc(var(--light-progress) * 100%));
+  --bg-elevated: color-mix(in srgb, #DCD8EB calc((1 - var(--light-progress)) * 100%), #EDEBF2 calc(var(--light-progress) * 100%));
   --bg-subtle: rgba(0, 0, 0, 0.05);
 
   --border-main: rgba(0, 0, 0, 0.14);

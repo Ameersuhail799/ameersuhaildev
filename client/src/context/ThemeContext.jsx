@@ -24,7 +24,7 @@ export const ThemeProvider = ({ children }) => {
     return 0;
   });
 
-  // Apply --theme-intensity and contrast-locked variables to root
+  // Apply continuous progress variables (--dark-progress & --light-progress) to root
   const applyIntensity = (val) => {
     const clamped = Math.max(0, Math.min(100, val));
     const normalized = clamped / 100;
@@ -33,10 +33,14 @@ export const ThemeProvider = ({ children }) => {
     root.style.setProperty("--theme-intensity", normalized.toFixed(4));
     root.setAttribute("data-theme-intensity", Math.round(clamped).toString());
 
-    // Domain flag: < 50 = Dark Domain, >= 50 = Light Domain
-    const isLightDomain = clamped >= 50;
-    root.style.setProperty("--domain-mode", isLightDomain ? "1" : "0");
+    // Calculate domain progress values (0.0 to 1.0)
+    const darkProgress = Math.min(1, clamped / 50);
+    const lightProgress = Math.max(0, (clamped - 50) / 50);
 
+    root.style.setProperty("--dark-progress", darkProgress.toFixed(4));
+    root.style.setProperty("--light-progress", lightProgress.toFixed(4));
+
+    const isLightDomain = clamped >= 50;
     if (isLightDomain) {
       root.classList.add("light");
       root.classList.remove("dark");
