@@ -27,8 +27,8 @@ html.light {
   --border-main: rgba(0, 0, 0, 0.12);
   --border-subtle: rgba(0, 0, 0, 0.06);
   --text-primary: #121118;
-  --text-secondary: #4A4656;
-  --text-muted: rgba(74, 70, 86, 0.65);
+  --text-secondary: #403C4D;
+  --text-muted: #5C576C;
   --accent-crimson: #BF4A1A;
   --accent-crimson-hover: #a33d13;
   --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.08);
@@ -177,11 +177,18 @@ html.portfolio-active, body.portfolio-active {
   background-color: var(--bg-main) !important;
 }
 
-/* Theme Utilities for Light/Dark Mode Cards & Sections */
+/* Logo Visibility Fix in Light Mode (Problems 1 & 2) */
+html.light img[src*="Logo.png"],
+html.light img[src*="ResLogo"] {
+  filter: brightness(0.12) drop-shadow(0 2px 10px rgba(0, 0, 0, 0.15)) !important;
+}
+
+/* Theme Utilities for Light Mode Cards & Containers */
 html.light .bg-\[\#0f0e11\],
 html.light .bg-\[\#17151a\],
 html.light .bg-\[\#16141a\],
-html.light .bg-\[\#030304\] {
+html.light .bg-\[\#030304\],
+html.light footer.bg-\[\#030304\] {
   background-color: var(--bg-card) !important;
 }
 
@@ -197,29 +204,81 @@ html.light .border-white\/5 {
   border-color: rgba(0, 0, 0, 0.12) !important;
 }
 
-html.light .text-\[\#F6F2FF\] {
+/* Text Hierarchy in Light Mode */
+html.light .text-\[\#F6F2FF\],
+html.light h1.text-\[\#F6F2FF\],
+html.light h2.text-\[\#F6F2FF\],
+html.light h3.text-\[\#F6F2FF\] {
   color: #121118 !important;
 }
 
-html.light .text-\[\#C9C5D0\] {
-  color: #4A4656 !important;
+/* Secondary & Description Text in Light Mode (Problems 3 & 4) */
+html.light .text-\[\#C9C5D0\],
+html.light .text-\[\#C9C5D0\]\/60,
+html.light .text-\[\#C9C5D0\]\/70,
+html.light .text-\[\#C9C5D0\]\/80,
+html.light .text-\[\#C9C5D0\]\/90,
+html.light .text-white\/50,
+html.light .text-white\/60,
+html.light .text-white\/70,
+html.light .text-white\/80 {
+  color: #403C4D !important;
 }
 
 html.light .text-white {
   color: #121118 !important;
 }
 
-html.light .text-white\/50,
-html.light .text-[#C9C5D0]\/70,
-html.light .text-[#C9C5D0]\/80 {
-  color: rgba(74, 70, 86, 0.75) !important;
+/* Inputs, Textareas, Select Options in Light Mode */
+html.light input,
+html.light textarea,
+html.light select,
+html.light option {
+  color: #121118 !important;
+  background-color: #FFFFFF !important;
 }
 
-/* Preserve white text for primary crimson buttons in Light Mode */
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: rgba(64, 60, 77, 0.5) !important;
+}
+
+/* Skills Section Overrides in Light Mode */
+html.light .skill-group,
+html.light .github-activity {
+  background-color: #FFFFFF !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light .skill-group__header span {
+  color: #121118 !important;
+}
+
+html.light .skill-group__header p {
+  color: #403C4D !important;
+}
+
+html.light .skill-pill {
+  background-color: #F4F3F7 !important;
+  color: #121118 !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+html.light .skill-pill__icon {
+  background-color: #FFFFFF !important;
+}
+
+/* Master CTA & Gradient Container in Light Mode */
+html.light .bg-gradient-to-r {
+  background-image: linear-gradient(to right, #FFFFFF, #F8F7FC, #FFFFFF) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Preserve Crisp White Text for Accent Crimson Buttons & Tags in Light Mode */
 html.light .bg-\[\#BF4A1A\],
 html.light .bg-\[\#BF4A1A\] *,
 html.light .bg-\[\#BF4A1A\] span,
-html.light .bg-gradient-to-r *,
 html.light button.bg-\[\#BF4A1A\],
 html.light a.bg-\[\#BF4A1A\] {
   color: #FFFFFF !important;
