@@ -323,3 +323,53 @@ button.bg-\[\#BF4A1A\],
 a.bg-\[\#BF4A1A\] {
   color: #FFFFFF !important;
 }
+
+/* ==========================================================================
+   PERMANENT DARK SECTIONS LOCK (About Me, Page Banners, Intro & Loader, GitHub)
+   Protect these components from ANY global Light Mode theme overrides!
+   ========================================================================== */
+#About_Me,
+#AboutMeText,
+#AboutBanner,
+.github-activity {
+  background-color: #030304 !important;
+  color: #F6F2FF !important;
+}
+
+#About_Me h2,
+#About_Me h3,
+#About_Me p,
+#About_Me span:not(.text-coffee),
+#AboutMeText h2,
+#AboutMeText h3,
+#AboutMeText p,
+#AboutMeText span:not(.text-coffee),
+#AboutBanner h2,
+#AboutBanner h3,
+#AboutBanner p,
+.github-activity h3,
+.github-activity p,
+.github-activity span:not(.text-coffee) {
+  color: inherit !important;
+}
+
+#About_Me .text-\[\#F6F2FF\],
+#AboutMeText .text-\[\#F6F2FF\],
+#AboutBanner .text-\[\#F6F2FF\],
+.github-activity .text-\[\#F6F2FF\] {
+  color: #F6F2FF !important;
+}
+
+#About_Me .text-\[\#C9C5D0\],
+#AboutMeText .text-\[\#C9C5D0\],
+#AboutBanner .text-\[\#C9C5D0\],
+.github-activity .text-\[\#C9C5D0\] {
+  color: #C9C5D0 !important;
+}
+
+#About_Me .text-white,
+#AboutMeText .text-white,
+#AboutBanner .text-white,
+.github-activity .text-white {
+  color: #FFFFFF !important;
+}
