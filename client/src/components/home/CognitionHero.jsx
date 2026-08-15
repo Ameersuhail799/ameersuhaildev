@@ -416,7 +416,15 @@ export function CognitionHero({ onExitIntro, isExiting }) {
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerCancel}
-      style={{ touchAction: "none" }}
+      style={{
+        touchAction: "none",
+        "--bg-main": "#030304",
+        "--bg-card": "#0f0e11",
+        "--text-primary": "#F6F2FF",
+        "--text-secondary": "#C9C5D0",
+        color: "#F6F2FF",
+        backgroundColor: "#030304"
+      }}
     >
       {/* Background Technical Grid Accent */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(124,58,237,0.04)_0%,transparent_75%)] pointer-events-none z-0" />

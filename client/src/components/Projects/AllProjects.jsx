@@ -110,7 +110,7 @@ const AllProjects = () => {
                                 onClick={() => setSelected(btn.id)}
                                 className={`shrink-0 py-2.5 px-3.5 md:py-3 md:px-4 duration-300 flex items-center gap-2 rounded-xl font-poppins text-xs font-bold cursor-pointer transition-all active:scale-95 ${selected === btn.id
                                     ? 'bg-coffee text-white shadow-lg shadow-coffee/25'
-                                    : 'bg-brand/10 text-brand/75 hover:bg-brand/20 hover:text-brand'
+                                    : 'bg-white/10 text-[var(--text-primary)] hover:bg-white/20'
                                     }`}
                             >
                                 {btn.icon}
@@ -152,7 +152,7 @@ const AllProjects = () => {
                 ) : (
                     <div id='Projects-Cards-Row' className="mt-10">
                         <div className='mb-6 flex items-center gap-4'>
-                            <span className="flex size-11 items-center justify-center rounded-full bg-Primary text-brand">
+                            <span className="flex size-11 items-center justify-center rounded-full bg-coffee text-white">
                                 <FiGrid aria-hidden="true" />
                             </span>
                             <div className='h-px flex-1 bg-Primary/20'></div>
