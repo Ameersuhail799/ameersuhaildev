@@ -4,6 +4,8 @@ import { Link } from 'react-router'
 import Magnet from '../effects/Magnet';
 import { FiArrowUpRight } from 'react-icons/fi';
 
+import ThemeToggle from './ThemeToggle';
+
 export const Navbar = () => {
 
   return (
@@ -44,17 +46,20 @@ export const Navbar = () => {
               </ul>
             </div>
 
-            {/* ----Button---- */}
-            <Magnet magnetStrength={2} padding={20}>
-              <div className="magnetic-btn" data-aos="fade-down" data-aos-duration="500" data-aos-delay="420" data-aos-easing="ease-out-cubic">
-                <Link aria-label="Contact Ameer Suhail" to={'/contact'} className='group inline-flex min-h-12 items-center gap-3 rounded-full border border-white/20 px-5 font-poppins text-sm font-semibold uppercase text-[#F6F2FF] hover:text-white transition-trigger transition-link duration-300 hover-this hover:border-[#BF4A1A] hover:bg-[#BF4A1A]'>
-                  Contact
-                  <span className='flex size-7 items-center justify-center rounded-full group-hover:bg-white group-hover:text-[#030304] bg-[#BF4A1A] text-white transition duration-300 group-hover:rotate-45'>
-                    <FiArrowUpRight />
-                  </span>
-                </Link>
-              </div>
-            </Magnet>
+            {/* ----Theme Toggle & Contact Button---- */}
+            <div className="flex items-center gap-4">
+              <ThemeToggle />
+              <Magnet magnetStrength={2} padding={20}>
+                <div className="magnetic-btn" data-aos="fade-down" data-aos-duration="500" data-aos-delay="420" data-aos-easing="ease-out-cubic">
+                  <Link aria-label="Contact Ameer Suhail" to={'/contact'} className='group inline-flex min-h-12 items-center gap-3 rounded-full border border-white/20 px-5 font-poppins text-sm font-semibold uppercase text-[#F6F2FF] hover:text-white transition-trigger transition-link duration-300 hover-this hover:border-[#BF4A1A] hover:bg-[#BF4A1A]'>
+                    Contact
+                    <span className='flex size-7 items-center justify-center rounded-full group-hover:bg-white group-hover:text-[#030304] bg-[#BF4A1A] text-white transition duration-300 group-hover:rotate-45'>
+                      <FiArrowUpRight />
+                    </span>
+                  </Link>
+                </div>
+              </Magnet>
+            </div>
           </div>
         </div>
       </nav>

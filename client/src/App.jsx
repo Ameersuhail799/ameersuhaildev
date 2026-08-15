@@ -19,6 +19,8 @@ import AdminSkills from './pages/AdminSkills'
 import AdminLogin from './pages/AdminLogin'
 import AdminMessages from './pages/AdminMessages'
 
+import { ThemeProvider } from './context/ThemeContext'
+
 export const App = () => {
   // ---------------Routing 
   const MyRoute = createBrowserRouter(createRoutesFromElements(
@@ -43,7 +45,7 @@ export const App = () => {
 
 
   return (
-    <>
+    <ThemeProvider>
       <SmoothScroll>
 
         <PreloaderWrapper>
@@ -55,7 +57,7 @@ export const App = () => {
         <ToastContainer />
 
       </SmoothScroll>
-    </>
+    </ThemeProvider>
   )
 }
 

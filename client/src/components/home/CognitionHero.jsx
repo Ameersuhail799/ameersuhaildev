@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Logo from "../../assets/images/Logo.png";
+import ThemeToggle from "../common/ThemeToggle";
 
 export function CognitionHero({ onExitIntro, isExiting }) {
   const heroRef = useRef(null);
@@ -469,12 +470,15 @@ export function CognitionHero({ onExitIntro, isExiting }) {
             </div>
           </div>
 
-          {/* Top Right: Status Badge */}
-          <div className="hidden sm:flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#BF4A1A] animate-ping" />
-            <span className="font-mono-custom text-[10px] uppercase tracking-[0.2em] text-[#C9C5D0]">
-              PORTFOLIO / 2026
-            </span>
+          {/* Top Right: Status Badge & Theme Toggle */}
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <div className="hidden sm:flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#BF4A1A] animate-ping" />
+              <span className="font-mono-custom text-[10px] uppercase tracking-[0.2em] text-[#C9C5D0]">
+                PORTFOLIO / 2026
+              </span>
+            </div>
           </div>
         </header>
 
