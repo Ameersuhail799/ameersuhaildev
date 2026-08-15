@@ -35,7 +35,7 @@ export const ResNavbar = () => {
             to={'/'}
             className='z-[70] flex size-12 items-center justify-center rounded-full border border-white/20 bg-white/10 shadow-[0_14px_34px_rgba(0,0,0,0.3)] backdrop-blur-xl transition-trigger transition-link'
           >
-            <img className='w-8 h-auto object-contain filter drop-shadow-[0_0_8px_rgba(246,242,255,0.4)]' src={ResLogo} alt="Logo" />
+            <img className='portfolio-logo w-8 h-auto object-contain filter drop-shadow-[0_0_8px_rgba(246,242,255,0.4)]' src={ResLogo} alt="Logo" />
           </Link>
 
           {/* ------Nav Menu Button------ */}

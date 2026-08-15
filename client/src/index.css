@@ -205,13 +205,17 @@ html.portfolio-active, body.portfolio-active {
 }
 
 /* Logo Treatment: Crisp White in Main Navigation Dark Domain, Obsidian Charcoal in Light Domain */
-html.portfolio-active.dark img[src*="Logo.png"],
-html.portfolio-active.dark img[src*="ResLogo"] {
+html.portfolio-active.dark .portfolio-logo,
+html.portfolio-active.dark nav img,
+html.portfolio-active.dark header img,
+html.portfolio-active.dark img[src*="Logo"] {
   filter: brightness(1) drop-shadow(0 0 8px rgba(246, 242, 255, 0.4)) !important;
 }
 
-html.portfolio-active.light img[src*="Logo.png"],
-html.portfolio-active.light img[src*="ResLogo"] {
+html.portfolio-active.light .portfolio-logo,
+html.portfolio-active.light nav img,
+html.portfolio-active.light header img,
+html.portfolio-active.light img[src*="Logo"] {
   filter: brightness(0.12) drop-shadow(0 2px 10px rgba(0, 0, 0, 0.15)) !important;
 }
 

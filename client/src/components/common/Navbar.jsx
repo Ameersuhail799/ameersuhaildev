@@ -13,7 +13,7 @@ export const Navbar = () => {
             {/* ----Logo---- */}
             <Magnet padding={40}>
               <Link to={'/'} className='hover-this transition-link flex items-center justify-center size-12 rounded-full border border-white/15 bg-white/5 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:border-[#BF4A1A]/60 transition-all duration-300' >
-                <img className='w-8 h-auto object-contain transition-trigger filter drop-shadow-[0_0_8px_rgba(246,242,255,0.4)]' src={Logo} alt="Logo" data-aos="fade-down" data-aos-duration="500" data-aos-delay="0" data-aos-easing="ease-out-cubic" />
+                <img className='portfolio-logo w-8 h-auto object-contain transition-trigger filter drop-shadow-[0_0_8px_rgba(246,242,255,0.4)]' src={Logo} alt="Logo" data-aos="fade-down" data-aos-duration="500" data-aos-delay="0" data-aos-easing="ease-out-cubic" />
               </Link>
             </Magnet>
 
