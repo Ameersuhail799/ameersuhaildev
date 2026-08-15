@@ -68,9 +68,9 @@ const timeAgo = (dateString) => {
   return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
 }
 
-// Orange-brown theme color gradient (Theme-Aware empty cell)
+// Orange-brown theme color gradient (Permanently Dark Widget)
 const getContributionColor = (score) => {
-  if (!score || score <= 0) return 'rgba(120, 120, 140, 0.18)'
+  if (!score || score <= 0) return '#23201d'
   if (score === 1) return '#5c2814'
   if (score === 2) return '#8f3718'
   if (score === 3) return '#bf4a1a'
@@ -209,23 +209,27 @@ const GithubActivity = () => {
 
   return (
     <div
-      className="github-activity rounded-[22px] border border-white/15 bg-[var(--bg-card)] p-5 text-[var(--text-primary)] shadow-[0_28px_70px_rgba(0,0,0,0.4)] sm:p-6"
+      className="rounded-[22px] border border-white/10 bg-[#0f0e11] p-5 text-[#F6F2FF] shadow-[0_28px_70px_rgba(0,0,0,0.5)] sm:p-6"
       data-aos="fade-up"
+      style={{
+        backgroundColor: '#0f0e11',
+        color: '#F6F2FF'
+      }}
     >
       {/* ── Top Header ── */}
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-4">
           <span className="flex size-[58px] shrink-0 items-center justify-center overflow-hidden rounded-[18px] border border-white/15 bg-white/5">
-            {profile?.avatar_url ? <img src={profile.avatar_url} alt="" /> : <FaGithub className="text-[var(--text-primary)]" />}
+            {profile?.avatar_url ? <img src={profile.avatar_url} alt="" /> : <FaGithub className="text-white" />}
           </span>
           <div>
             <div className="flex items-center gap-2">
-              <span className="inline-block size-2 rounded-full bg-coffee animate-pulse" />
-              <p className="font-poppins text-xs font-bold uppercase text-coffee tracking-wider">
+              <span className="inline-block size-2 rounded-full bg-[#BF4A1A] animate-pulse" />
+              <p className="font-poppins text-xs font-bold uppercase text-[#BF4A1A] tracking-wider">
                 GitHub Activity
               </p>
             </div>
-            <h3 className="mt-1 font-soldier text-xl sm:text-2xl md:text-[34px] font-bold uppercase leading-tight text-[var(--text-primary)] break-words">
+            <h3 className="mt-1 font-soldier text-xl sm:text-2xl md:text-[34px] font-bold uppercase leading-tight text-[#F6F2FF] break-words">
               {profile?.name || GITHUB_USERNAME}
             </h3>
           </div>
@@ -235,7 +239,7 @@ const GithubActivity = () => {
           href={GITHUB_PROFILE}
           target="_blank"
           rel="noreferrer"
-          className="flex size-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-[var(--text-primary)] transition hover:bg-coffee hover:text-white hover:border-coffee"
+          className="flex size-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition hover:bg-[#BF4A1A] hover:border-[#BF4A1A]"
           aria-label="Open GitHub profile"
         >
           <FiArrowUpRight aria-hidden="true" />
@@ -247,13 +251,13 @@ const GithubActivity = () => {
         {activityStats.map((stat) => (
           <div
             key={stat.label}
-            className="rounded-2xl border border-white/15 bg-white/5 px-4 py-3"
+            className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3"
           >
-            <span className="mb-2 flex size-7 items-center justify-center rounded-xl bg-coffee/20 text-coffee text-sm">
+            <span className="mb-2 flex size-7 items-center justify-center rounded-xl bg-[#BF4A1A]/20 text-[#BF4A1A] text-sm">
               {stat.icon}
             </span>
-            <strong className="block font-poppins text-[20px] leading-none text-[var(--text-primary)]">{stat.value}</strong>
-            <span className="mt-1 block font-poppins text-[11px] font-semibold text-[var(--text-secondary)]">
+            <strong className="block font-poppins text-[20px] leading-none text-[#F6F2FF]">{stat.value}</strong>
+            <span className="mt-1 block font-poppins text-[11px] font-semibold text-[#C9C5D0]/70">
               {stat.label}
             </span>
           </div>
@@ -261,12 +265,12 @@ const GithubActivity = () => {
       </div>
 
       {/* ── Orange-Brown Theme Contribution Grid (Apr - Aug) ── */}
-      <div className="mt-5 rounded-2xl border border-white/15 bg-white/5 p-4 text-[var(--text-secondary)]">
+      <div className="mt-5 rounded-2xl border border-white/10 bg-[#17151a] p-4 text-[#C9C5D0]">
         <div className="flex items-center justify-between mb-4">
-          <span className="font-poppins text-xs font-semibold text-[var(--text-primary)] flex items-center gap-2">
-            <FiCalendar className="text-coffee" /> Contributions in Apr - Aug
+          <span className="font-poppins text-xs font-semibold text-white/90 flex items-center gap-2">
+            <FiCalendar className="text-[#BF4A1A]" /> Contributions in Apr - Aug
           </span>
-          <span className="font-poppins text-[10px] text-coffee bg-coffee/10 border border-coffee/25 px-2.5 py-0.5 rounded-full">
+          <span className="font-poppins text-[10px] text-[#BF4A1A] bg-[#BF4A1A]/10 border border-[#BF4A1A]/25 px-2.5 py-0.5 rounded-full">
             Realtime GitHub Sync
           </span>
         </div>
@@ -275,7 +279,7 @@ const GithubActivity = () => {
         <div className="relative overflow-x-auto pb-2 custom-scrollbar">
           {/* Tooltip Popup */}
           {hoveredDay && (
-            <div className="absolute top-0 right-2 z-20 font-poppins text-[11px] bg-[var(--bg-card)] text-[var(--text-primary)] border border-white/15 px-2.5 py-1 rounded-md shadow-lg pointer-events-none">
+            <div className="absolute top-0 right-2 z-20 font-poppins text-[11px] bg-[#231f1c] text-[#e0deda] border border-[#3d2c25] px-2.5 py-1 rounded-md shadow-lg pointer-events-none">
               {hoveredDay.score > 0
                 ? `${hoveredDay.score} contribution${hoveredDay.score > 1 ? 's' : ''} on ${hoveredDay.formattedDate}`
                 : `No contributions on ${hoveredDay.formattedDate}`}
@@ -284,7 +288,7 @@ const GithubActivity = () => {
 
           <div className="inline-block min-w-full">
             {/* Month Header Row */}
-            <div className="flex text-[11px] font-poppins text-[var(--text-secondary)] mb-1.5 pl-8">
+            <div className="flex text-[11px] font-poppins text-[#C9C5D0]/60 mb-1.5 pl-8">
               {gridData.map((_, idx) => {
                 const header = monthHeaders.find((h) => h.colIndex === idx)
                 return (
@@ -298,7 +302,7 @@ const GithubActivity = () => {
             {/* Grid Days (7 Rows x N Weeks) */}
             <div className="flex items-start">
               {/* Day Labels */}
-              <div className="flex flex-col gap-[3px] text-[10px] font-poppins text-[var(--text-secondary)] pr-2 shrink-0 pt-0.5">
+              <div className="flex flex-col gap-[3px] text-[10px] font-poppins text-[#C9C5D0]/60 pr-2 shrink-0 pt-0.5">
                 <span className="h-[12px] sm:h-[14px]"></span>
                 <span className="h-[12px] sm:h-[14px] leading-none">Mon</span>
                 <span className="h-[12px] sm:h-[14px]"></span>
@@ -317,7 +321,7 @@ const GithubActivity = () => {
                         key={day.date}
                         onMouseEnter={() => setHoveredDay(day)}
                         onMouseLeave={() => setHoveredDay(null)}
-                        className="size-[11px] sm:size-[13px] rounded-[2px] cursor-pointer transition-transform hover:scale-125 border border-black/15"
+                        className="size-[11px] sm:size-[13px] rounded-[2px] cursor-pointer transition-transform hover:scale-125 border border-black/30"
                         style={{ backgroundColor: getContributionColor(day.score) }}
                       />
                     ))}
@@ -327,7 +331,7 @@ const GithubActivity = () => {
             </div>
 
             {/* Grid Legend */}
-            <div className="mt-4 flex items-center justify-between text-[11px] font-poppins text-[var(--text-secondary)]">
+            <div className="mt-4 flex items-center justify-between text-[11px] font-poppins text-[#C9C5D0]/60">
               <span>Learn how we count contributions</span>
               <div className="flex items-center gap-1.5">
                 <span>Less</span>
@@ -347,12 +351,12 @@ const GithubActivity = () => {
 
       {/* ── Live Recent Commits ── */}
       {commits.length > 0 && (
-        <div className="mt-5 rounded-2xl border border-white/15 bg-white/5 p-4">
+        <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-4">
           <div className="flex items-center justify-between mb-3">
-            <span className="font-poppins text-xs font-bold uppercase text-coffee tracking-wider flex items-center gap-2">
+            <span className="font-poppins text-xs font-bold uppercase text-[#BF4A1A] tracking-wider flex items-center gap-2">
               <FiGitCommit /> Live Recent Commits
             </span>
-            <span className="font-poppins text-[10px] uppercase tracking-widest text-[var(--text-secondary)] opacity-70">
+            <span className="font-poppins text-[10px] uppercase tracking-widest text-[#C9C5D0]/50">
               Showing {commits.length} commits
             </span>
           </div>
@@ -364,17 +368,17 @@ const GithubActivity = () => {
                 href={commit.url}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex items-center justify-between gap-3 p-2.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-coffee/40 transition-all duration-300"
+                className="group flex items-center justify-between gap-3 p-2.5 rounded-xl border border-white/5 bg-white/5 hover:bg-white/10 hover:border-[#BF4A1A]/40 transition-all duration-300"
               >
                 <div className="flex items-center gap-3 overflow-hidden">
-                  <span className="shrink-0 font-mono text-[10px] font-bold text-coffee bg-coffee/10 border border-coffee/20 px-2 py-0.5 rounded-md">
+                  <span className="shrink-0 font-mono text-[10px] font-bold text-[#BF4A1A] bg-[#BF4A1A]/10 border border-[#BF4A1A]/20 px-2 py-0.5 rounded-md">
                     {commit.repo}
                   </span>
-                  <span className="font-poppins text-xs text-[var(--text-primary)] font-medium truncate group-hover:text-coffee transition-colors">
+                  <span className="font-poppins text-xs text-[#F6F2FF] font-medium truncate group-hover:text-[#BF4A1A] transition-colors">
                     {commit.message}
                   </span>
                 </div>
-                <span className="shrink-0 font-poppins text-[10px] text-[var(--text-secondary)] opacity-70 group-hover:opacity-100">
+                <span className="shrink-0 font-poppins text-[10px] text-[#C9C5D0]/50 group-hover:text-[#C9C5D0]">
                   {commit.time}
                 </span>
               </a>
