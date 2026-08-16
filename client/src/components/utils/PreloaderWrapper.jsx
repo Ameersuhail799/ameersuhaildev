@@ -7,16 +7,18 @@ const PreloaderWrapper = ({ children }) => {
   // State machine: 'loading' -> 'exiting_loading' -> 'intro' -> 'entering_portfolio' -> 'portfolio'
   const [entryState, setEntryState] = useState("loading");
 
-  // Manage body scroll and background color class based on entryState
+  // Manage body scroll and portfolio-active theme class seamlessly
   useEffect(() => {
-    if (entryState !== "portfolio") {
+    if (entryState === "portfolio" || entryState === "entering_portfolio") {
+      document.documentElement.classList.add("portfolio-active");
+      document.body.classList.add("portfolio-active");
+      if (entryState === "portfolio") {
+        document.body.style.overflow = "";
+      }
+    } else {
       document.body.style.overflow = "hidden";
       document.documentElement.classList.remove("portfolio-active");
       document.body.classList.remove("portfolio-active");
-    } else {
-      document.body.style.overflow = "";
-      document.documentElement.classList.add("portfolio-active");
-      document.body.classList.add("portfolio-active");
     }
     return () => {
       document.body.style.overflow = "";
@@ -36,13 +38,14 @@ const PreloaderWrapper = ({ children }) => {
   // STAGE 2 -> STAGE 3: CognitionHero (User Action) -> Seamless Portfolio
   const handleExitIntro = () => {
     if (entryState !== "intro") return;
+    // Activate theme intensity immediately upon exit trigger to eliminate dark flash glitch
+    document.documentElement.classList.add("portfolio-active");
+    document.body.classList.add("portfolio-active");
     setEntryState("entering_portfolio");
 
     setTimeout(() => {
       setEntryState("portfolio");
       document.body.style.overflow = "";
-      document.documentElement.classList.add("portfolio-active");
-      document.body.classList.add("portfolio-active");
       window.scrollTo({ top: 0, behavior: "instant" });
     }, 500);
   };
@@ -77,7 +80,9 @@ const PreloaderWrapper = ({ children }) => {
       </div>
 
       {/* ── THEME INTENSITY CONTROLLER (Appears ONLY after Loader & Cognitive Intro complete) ── */}
-      {entryState === "portfolio" && <ThemeIntensityController />}
+      {(entryState === "portfolio" || entryState === "entering_portfolio") && (
+        <ThemeIntensityController />
+      )}
     </>
   );
 };
