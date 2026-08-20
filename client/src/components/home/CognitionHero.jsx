@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import Logo from "../../assets/images/Logo.png";
 
-export function CognitionHero({ onExitIntro, isExiting }) {
+export function CognitionHero({ onExitIntro, isExiting, isActive = true }) {
   const heroRef = useRef(null);
   const mainCanvasRef = useRef(null);
 
@@ -83,7 +83,7 @@ export function CognitionHero({ onExitIntro, isExiting }) {
 
   // Listen to wheel scroll, keypress, and swipe gestures to exit intro
   useEffect(() => {
-    if (!imagesLoaded || isExiting) return;
+    if (!imagesLoaded || isExiting || !isActive) return;
 
     let touchStartY = 0;
 
@@ -126,7 +126,7 @@ export function CognitionHero({ onExitIntro, isExiting }) {
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [imagesLoaded, isExiting, onExitIntro, hasTouchedPhoto]);
+  }, [imagesLoaded, isExiting, isActive, onExitIntro, hasTouchedPhoto]);
 
   // Main Canvas Rendering Loop with 100% Guaranteed 1:1 Image Alignment on Mobile & Desktop
   useEffect(() => {

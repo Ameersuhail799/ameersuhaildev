@@ -52,7 +52,7 @@ const PreloaderWrapper = ({ children }) => {
 
   return (
     <>
-      {/* ── STAGE 1: CINEMATIC INITIAL LOADER ── */}
+      {/* ── STAGE 1: CINEMATIC INITIAL LOADER (Top Layer z-[100000]) ── */}
       {(entryState === "loading" || entryState === "exiting_loading") && (
         <PortfolioLoader
           onLoadingComplete={handleLoadingComplete}
@@ -60,15 +60,19 @@ const PreloaderWrapper = ({ children }) => {
         />
       )}
 
-      {/* ── STAGE 2: FULL-VIEWPORT INTRO (Fades & slides up cleanly) ── */}
-      {(entryState === "intro" || entryState === "entering_portfolio") && (
+      {/* ── STAGE 2: COGNITIVE HERO INTRO (Pre-mounted during loading for ZERO transition lag) ── */}
+      {(entryState === "loading" ||
+        entryState === "exiting_loading" ||
+        entryState === "intro" ||
+        entryState === "entering_portfolio") && (
         <CognitionHero
           onExitIntro={handleExitIntro}
           isExiting={entryState === "entering_portfolio"}
+          isActive={entryState === "intro"}
         />
       )}
 
-      {/* ── STAGE 3: MAIN PORTFOLIO (Pre-mounted in DOM to ensure zero transition lag) ── */}
+      {/* ── STAGE 3: MAIN PORTFOLIO (Pre-mounted in DOM for zero transition lag) ── */}
       <div
         className={`w-full transition-opacity duration-500 ease-out ${
           entryState === "portfolio" || entryState === "entering_portfolio"
