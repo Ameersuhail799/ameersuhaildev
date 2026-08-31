@@ -36,24 +36,32 @@ const KNOWN_SCORES = {
   '2026-08-13': 8,
   '2026-08-14': 6,
   '2026-08-15': 3,
+  '2026-08-16': 4,
+  '2026-08-18': 2,
+  '2026-08-20': 5,
+  '2026-08-22': 3,
+  '2026-08-25': 4,
+  '2026-08-28': 3,
+  '2026-08-30': 6,
+  '2026-08-31': 4,
 }
 
 const INITIAL_PROFILE = {
   name: 'AMEER SUHAIL K T',
-  public_repos: 11,
-  followers: 5,
+  public_repos: 12,
+  followers: 6,
   avatar_url: 'https://avatars.githubusercontent.com/u/195453600?v=4'
 }
 
 const INITIAL_COMMITS = [
-  { sha: 'a518bfb', repo: 'ameersuhaildev', message: 'chore: remove unused redundant backup images & clean repository', time: '1d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/a518bfb' },
-  { sha: '61ec5fa', repo: 'ameersuhaildev', message: 'feat: add interactive floating liquid touch hint badge', time: '1d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/61ec5fa' },
-  { sha: '5557dbb', repo: 'ameersuhaildev', message: 'feat: add bottom CTA banner to view all 20+ certificates on GitHub', time: '1d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/5557dbb' },
-  { sha: 'ccbe031', repo: 'ameersuhaildev', message: 'fix: 1:1 image mask alignment in CognitionHero & mobile text wrap', time: '1d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/ccbe031' },
-  { sha: 'c7c5307', repo: 'ameersuhaildev', message: 'style: increase mobile liquid touch radius to 150', time: '1d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/c7c5307' },
-  { sha: '3460d3d', repo: 'ameersuhaildev', message: 'feat: update banner headline to Option 1 Modern AI-First Engineer', time: '1d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/3460d3d' },
-  { sha: '3fe18c8', repo: 'ameersuhaildev', message: 'perf: pre-mount portfolio for zero transition lag', time: '1d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/3fe18c8' },
-  { sha: '851d6e5', repo: 'ameersuhaildev', message: 'feat: complete portfolio updates, certificates integration & projects', time: '2d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/851d6e5' },
+  { sha: 'f9603d9', repo: 'ameersuhaildev', message: 'perf: pre-mount CognitionHero in background during loading screen for instant zero-lag intro transition', time: '2d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/f9603d9' },
+  { sha: '37314b8', repo: 'ameersuhaildev', message: 'fix: activate portfolio-active immediately on CognitionHero exit to eliminate 500ms dark theme flash glitch', time: '3d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/37314b8' },
+  { sha: '461df71', repo: 'ameersuhaildev', message: 'feat: set initial default theme intensity to 50', time: '4d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/461df71' },
+  { sha: '46c59e4', repo: 'ameersuhaildev', message: 'fix: lock Skills header, Projects banner, and Contact banner to permanent dark theme #030304', time: '4d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/46c59e4' },
+  { sha: '223490a', repo: 'ameersuhaildev', message: 'fix: add explicit high-specificity !important permanent dark CSS rules for About Me sections and GithubActivity', time: '4d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/223490a' },
+  { sha: '4140ee7', repo: 'ameersuhaildev', message: 'fix: lock AboutMe component on Home page to permanent dark theme #030304', time: '5d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/4140ee7' },
+  { sha: '5aef415', repo: 'ameersuhaildev', message: 'fix: lock AboutText, PageBanner, and CircularText to permanent dark theme #030304', time: '5d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/5aef415' },
+  { sha: '8304354', repo: 'ameersuhaildev', message: 'fix: resolve hardcoded dark text colors in PageBanner and CircularText for 100% legibility in all themes', time: '6d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/8304354' },
 ]
 
 const timeAgo = (dateString) => {
@@ -201,8 +209,8 @@ const GithubActivity = () => {
 
   const activityStats = useMemo(() => {
     return [
-      { label: 'Public repos', value: profile?.public_repos ?? 11, icon: <FiGitBranch /> },
-      { label: 'Followers', value: profile?.followers ?? 5, icon: <FiUsers /> },
+      { label: 'Public repos', value: profile?.public_repos ?? 12, icon: <FiGitBranch /> },
+      { label: 'Followers', value: profile?.followers ?? 6, icon: <FiUsers /> },
       { label: 'Recent commits', value: commits.length || 8, icon: <FiGitCommit /> },
     ]
   }, [profile, commits])
@@ -264,11 +272,11 @@ const GithubActivity = () => {
         ))}
       </div>
 
-      {/* ── Orange-Brown Theme Contribution Grid (Apr - Aug) ── */}
+      {/* ── Orange-Brown Theme Contribution Grid ── */}
       <div className="mt-5 rounded-2xl border border-white/10 bg-[#17151a] p-4 text-[#C9C5D0]">
         <div className="flex items-center justify-between mb-4">
           <span className="font-poppins text-xs font-semibold text-white/90 flex items-center gap-2">
-            <FiCalendar className="text-[#BF4A1A]" /> Contributions in Apr - Aug
+            <FiCalendar className="text-[#BF4A1A]" /> Contributions in Recent Months
           </span>
           <span className="font-poppins text-[10px] text-[#BF4A1A] bg-[#BF4A1A]/10 border border-[#BF4A1A]/25 px-2.5 py-0.5 rounded-full">
             Realtime GitHub Sync
