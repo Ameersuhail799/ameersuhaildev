@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { FaGithub } from 'react-icons/fa'
-import { FiArrowUpRight, FiCalendar, FiGitBranch, FiUsers, FiGitCommit } from 'react-icons/fi'
+import { FiArrowUpRight, FiCalendar, FiGitBranch, FiUsers, FiGitCommit, FiCheckCircle } from 'react-icons/fi'
 
 const GITHUB_USERNAME = 'ameersuhail799'
 const GITHUB_PROFILE = `https://github.com/${GITHUB_USERNAME}`
@@ -44,24 +44,33 @@ const KNOWN_SCORES = {
   '2026-08-28': 3,
   '2026-08-30': 6,
   '2026-08-31': 4,
+  // September
+  '2026-09-01': 3,
+  '2026-09-02': 4,
+  '2026-09-03': 2,
+  '2026-09-04': 5,
+  '2026-09-05': 8,
+  '2026-09-06': 4,
+  '2026-09-07': 5,
+  '2026-09-08': 3,
 }
 
 const INITIAL_PROFILE = {
   name: 'AMEER SUHAIL K T',
-  public_repos: 12,
-  followers: 6,
+  public_repos: 13,
+  followers: 5,
   avatar_url: 'https://avatars.githubusercontent.com/u/195453600?v=4'
 }
 
 const INITIAL_COMMITS = [
-  { sha: 'f9603d9', repo: 'ameersuhaildev', message: 'perf: pre-mount CognitionHero in background during loading screen for instant zero-lag intro transition', time: '2d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/f9603d9' },
-  { sha: '37314b8', repo: 'ameersuhaildev', message: 'fix: activate portfolio-active immediately on CognitionHero exit to eliminate 500ms dark theme flash glitch', time: '3d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/37314b8' },
-  { sha: '461df71', repo: 'ameersuhaildev', message: 'feat: set initial default theme intensity to 50', time: '4d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/461df71' },
-  { sha: '46c59e4', repo: 'ameersuhaildev', message: 'fix: lock Skills header, Projects banner, and Contact banner to permanent dark theme #030304', time: '4d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/46c59e4' },
-  { sha: '223490a', repo: 'ameersuhaildev', message: 'fix: add explicit high-specificity !important permanent dark CSS rules for About Me sections and GithubActivity', time: '4d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/223490a' },
-  { sha: '4140ee7', repo: 'ameersuhaildev', message: 'fix: lock AboutMe component on Home page to permanent dark theme #030304', time: '5d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/4140ee7' },
-  { sha: '5aef415', repo: 'ameersuhaildev', message: 'fix: lock AboutText, PageBanner, and CircularText to permanent dark theme #030304', time: '5d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/5aef415' },
-  { sha: '8304354', repo: 'ameersuhaildev', message: 'fix: resolve hardcoded dark text colors in PageBanner and CircularText for 100% legibility in all themes', time: '6d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/8304354' },
+  { sha: 'ffdbac8', repo: 'RELIFE', message: 'feat: implement ReLife approval passport and impact center', time: '2d ago', url: 'https://github.com/Ameersuhail799/RELIFE/commit/ffdbac8' },
+  { sha: 'ddc0795', repo: 'RELIFE', message: 'feat: implement ReLife scenario lab and demand matching', time: '2d ago', url: 'https://github.com/Ameersuhail799/RELIFE/commit/ddc0795' },
+  { sha: '6c6866e', repo: 'RELIFE', message: 'feat: implement ReLife command center and asset intelligence', time: '2d ago', url: 'https://github.com/Ameersuhail799/RELIFE/commit/6c6866e' },
+  { sha: 'e56c43b', repo: 'RELIFE', message: 'fix(frontend): refine mobile responsiveness, typography truncation, and scrollbar styles', time: '2d ago', url: 'https://github.com/Ameersuhail799/RELIFE/commit/e56c43b' },
+  { sha: 'f0c3adb', repo: 'RELIFE', message: 'feat: add ReLife frontend design system and application shell', time: '2d ago', url: 'https://github.com/Ameersuhail799/RELIFE/commit/f0c3adb' },
+  { sha: '646b2ee', repo: 'ameersuhaildev', message: 'feat: update GitHub activity section with latest August scores, stats, and commit logs', time: '7d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/646b2ee' },
+  { sha: 'f9603d9', repo: 'ameersuhaildev', message: 'perf: pre-mount CognitionHero in background during loading screen for instant zero-lag intro transition', time: '18d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/f9603d9' },
+  { sha: '37314b8', repo: 'ameersuhaildev', message: 'fix: activate portfolio-active immediately on CognitionHero exit to eliminate 500ms dark theme flash glitch', time: '23d ago', url: 'https://github.com/Ameersuhail799/ameersuhaildev/commit/37314b8' },
 ]
 
 const timeAgo = (dateString) => {
@@ -123,63 +132,113 @@ const GithubActivity = () => {
   const [commits, setCommits] = useState(INITIAL_COMMITS)
   const [gridData, setGridData] = useState(() => generateWeeksGrid())
   const [hoveredDay, setHoveredDay] = useState(null)
+  const [isLiveConnected, setIsLiveConnected] = useState(false)
 
   useEffect(() => {
     const controller = new AbortController()
 
     const loadLiveData = async () => {
       try {
-        const [profileRes, eventsRes, chartRes] = await Promise.allSettled([
+        // Fetch Live GitHub User Profile & Public Repos Commits simultaneously
+        const [profileRes, eventsRes, relifeCommitsRes, portfolioCommitsRes] = await Promise.allSettled([
           fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, { signal: controller.signal }),
           fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events/public`, { signal: controller.signal }),
-          fetch(`https://ghchart.rshah.org/BF4A1A/${GITHUB_USERNAME}`, { signal: controller.signal })
+          fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/RELIFE/commits`, { signal: controller.signal }),
+          fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/ameersuhaildev/commits`, { signal: controller.signal })
         ])
+
+        let liveFound = false
 
         if (profileRes.status === 'fulfilled' && profileRes.value.ok) {
           const p = await profileRes.value.json()
-          setProfile(p)
-        }
-
-        if (eventsRes.status === 'fulfilled' && eventsRes.value.ok) {
-          const events = await eventsRes.value.json()
-          const parsedCommits = []
-          events.forEach((ev) => {
-            if (ev.type === 'PushEvent' && ev.payload?.commits) {
-              ev.payload.commits.forEach((c) => {
-                parsedCommits.push({
-                  sha: c.sha ? c.sha.slice(0, 7) : 'commit',
-                  repo: ev.repo.name.replace(/^Ameersuhail799\//i, ''),
-                  message: c.message,
-                  url: `https://github.com/${ev.repo.name}/commit/${c.sha}`,
-                  time: timeAgo(ev.created_at)
-                })
-              })
-            }
-          })
-          if (parsedCommits.length > 0) {
-            setCommits(parsedCommits.slice(0, 8))
+          if (p && p.public_repos !== undefined) {
+            setProfile({
+              name: p.name || INITIAL_PROFILE.name,
+              public_repos: p.public_repos ?? INITIAL_PROFILE.public_repos,
+              followers: p.followers ?? INITIAL_PROFILE.followers,
+              avatar_url: p.avatar_url || INITIAL_PROFILE.avatar_url
+            })
+            liveFound = true
           }
         }
 
-        if (chartRes.status === 'fulfilled' && chartRes.value.ok) {
-          const svgText = await chartRes.value.text()
-          const parser = new DOMParser()
-          const doc = parser.parseFromString(svgText, 'image/svg+xml')
-          const rects = Array.from(doc.querySelectorAll('rect'))
+        const liveCommitsList = []
 
-          const liveScores = {}
-          rects.forEach((r) => {
-            const date = r.getAttribute('data-date')
-            const score = parseInt(r.getAttribute('data-score') || '0', 10)
-            if (date && score > 0) {
-              liveScores[date] = score
+        // Parse RELIFE commits
+        if (relifeCommitsRes.status === 'fulfilled' && relifeCommitsRes.value.ok) {
+          const relifeData = await relifeCommitsRes.value.json()
+          if (Array.isArray(relifeData)) {
+            relifeData.slice(0, 5).forEach((c) => {
+              liveCommitsList.push({
+                sha: c.sha ? c.sha.slice(0, 7) : 'commit',
+                repo: 'RELIFE',
+                message: c.commit?.message ? c.commit.message.split('\n')[0] : 'update',
+                url: c.html_url || `https://github.com/${GITHUB_USERNAME}/RELIFE/commit/${c.sha}`,
+                rawDate: c.commit?.committer?.date ? new Date(c.commit.committer.date) : new Date(),
+                time: timeAgo(c.commit?.committer?.date)
+              })
+            })
+            liveFound = true
+          }
+        }
+
+        // Parse ameersuhaildev commits
+        if (portfolioCommitsRes.status === 'fulfilled' && portfolioCommitsRes.value.ok) {
+          const portData = await portfolioCommitsRes.value.json()
+          if (Array.isArray(portData)) {
+            portData.slice(0, 5).forEach((c) => {
+              liveCommitsList.push({
+                sha: c.sha ? c.sha.slice(0, 7) : 'commit',
+                repo: 'ameersuhaildev',
+                message: c.commit?.message ? c.commit.message.split('\n')[0] : 'update',
+                url: c.html_url || `https://github.com/${GITHUB_USERNAME}/ameersuhaildev/commit/${c.sha}`,
+                rawDate: c.commit?.committer?.date ? new Date(c.commit.committer.date) : new Date(),
+                time: timeAgo(c.commit?.committer?.date)
+              })
+            })
+            liveFound = true
+          }
+        }
+
+        // Parse Public Events
+        if (eventsRes.status === 'fulfilled' && eventsRes.value.ok) {
+          const events = await eventsRes.value.json()
+          if (Array.isArray(events)) {
+            events.forEach((ev) => {
+              if (ev.type === 'PushEvent' && ev.payload?.commits) {
+                ev.payload.commits.forEach((c) => {
+                  liveCommitsList.push({
+                    sha: c.sha ? c.sha.slice(0, 7) : 'commit',
+                    repo: ev.repo?.name ? ev.repo.name.replace(/^Ameersuhail799\//i, '') : 'github',
+                    message: c.message ? c.message.split('\n')[0] : 'push update',
+                    url: `https://github.com/${ev.repo?.name || GITHUB_USERNAME}/commit/${c.sha}`,
+                    rawDate: ev.created_at ? new Date(ev.created_at) : new Date(),
+                    time: timeAgo(ev.created_at)
+                  })
+                })
+              }
+            })
+            liveFound = true
+          }
+        }
+
+        if (liveCommitsList.length > 0) {
+          // Deduplicate by SHA and sort by date descending
+          const uniqueMap = new Map()
+          liveCommitsList.forEach((item) => {
+            if (!uniqueMap.has(item.sha)) {
+              uniqueMap.set(item.sha, item)
             }
           })
+          const sorted = Array.from(uniqueMap.values()).sort((a, b) => b.rawDate - a.rawDate)
+          setCommits(sorted.slice(0, 8))
+        }
 
-          setGridData(generateWeeksGrid(liveScores))
+        if (liveFound) {
+          setIsLiveConnected(true)
         }
       } catch (err) {
-        // Fallback to initial state gracefully
+        // Fallback to static initial state gracefully
       }
     }
 
@@ -209,8 +268,8 @@ const GithubActivity = () => {
 
   const activityStats = useMemo(() => {
     return [
-      { label: 'Public repos', value: profile?.public_repos ?? 12, icon: <FiGitBranch /> },
-      { label: 'Followers', value: profile?.followers ?? 6, icon: <FiUsers /> },
+      { label: 'Public repos', value: profile?.public_repos ?? 13, icon: <FiGitBranch /> },
+      { label: 'Followers', value: profile?.followers ?? 5, icon: <FiUsers /> },
       { label: 'Recent commits', value: commits.length || 8, icon: <FiGitCommit /> },
     ]
   }, [profile, commits])
@@ -232,9 +291,15 @@ const GithubActivity = () => {
           </span>
           <div>
             <div className="flex items-center gap-2">
-              <span className="inline-block size-2 rounded-full bg-[#BF4A1A] animate-pulse" />
-              <p className="font-poppins text-xs font-bold uppercase text-[#BF4A1A] tracking-wider">
-                GitHub Activity
+              <span className={`inline-block size-2 rounded-full ${isLiveConnected ? 'bg-emerald-400 animate-ping' : 'bg-[#BF4A1A] animate-pulse'}`} />
+              <p className="font-poppins text-xs font-bold uppercase text-[#BF4A1A] tracking-wider flex items-center gap-1.5">
+                {isLiveConnected ? (
+                  <>
+                    <FiCheckCircle className="text-emerald-400 text-xs inline" /> Live GitHub Connected
+                  </>
+                ) : (
+                  'GitHub Activity'
+                )}
               </p>
             </div>
             <h3 className="mt-1 font-soldier text-xl sm:text-2xl md:text-[34px] font-bold uppercase leading-tight text-[#F6F2FF] break-words">
