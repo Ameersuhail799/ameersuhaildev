@@ -1,7 +1,7 @@
-import stylespotImg from '../assets/images/stylespot_preview.png'
-import careerosImg from '../assets/images/careeros_preview.png'
-import portfolioV1Img from '../assets/images/portfolio_v1_preview.png'
-import activityPointImg from '../assets/images/activitypoint_preview.png'
+import stylespotImg from '../assets/images/stylespot_preview.webp'
+import careerosImg from '../assets/images/careeros_preview.webp'
+import portfolioV1Img from '../assets/images/portfolio_v1_preview.webp'
+import activityPointImg from '../assets/images/activitypoint_preview.webp'
 
 export const defaultProjects = [
   {

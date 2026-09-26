@@ -43,8 +43,9 @@ const addProject = async (req, res) => {
 // =============== Get all Product ==================
 const getAll = async (req, res) => {
     try {
-        const page = Number(req.query.page) || 1;
-        const limit = Number(req.query.limit) || 6;
+        const page = Math.max(1, Number(req.query.page) || 1);
+        const requestedLimit = Number(req.query.limit) || 6;
+        const limit = Math.min(Math.max(1, requestedLimit), 50);
         const skip = (page - 1) * limit;
         const category = req.query.category;
 
@@ -53,14 +54,15 @@ const getAll = async (req, res) => {
 
         if (category) { filter.category = category; }
 
-        // -------- total count
-        const total = await projectSchema.countDocuments();
-
-        // -------- data
-        const projects = await projectSchema.find(filter)
-            .sort({ createdAt: -1 })
-            .skip(skip)
-            .limit(limit);
+        // -------- total count & data in parallel
+        const [total, projects] = await Promise.all([
+            projectSchema.countDocuments(filter),
+            projectSchema.find(filter)
+                .sort({ createdAt: -1 })
+                .skip(skip)
+                .limit(limit)
+                .lean()
+        ]);
 
         const totalPages = Math.ceil(total / limit);
 

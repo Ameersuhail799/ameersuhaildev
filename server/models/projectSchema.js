@@ -14,6 +14,7 @@ const projectSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'category',
         required: true,
+        index: true
     },
     description: {
         type: String,
@@ -37,9 +38,15 @@ const projectSchema = new mongoose.Schema({
     },
     isFeatured: {
         type: Boolean,
-        default: false
+        default: false,
+        index: true
     },
 
 }, { timestamps: true });
+
+// Compound indexes for fast query execution and sorting under load
+projectSchema.index({ category: 1, createdAt: -1 });
+projectSchema.index({ isFeatured: 1, createdAt: -1 });
+projectSchema.index({ createdAt: -1 });
 
 module.exports = mongoose.model('project', projectSchema)

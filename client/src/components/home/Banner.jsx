@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router';
-import PortfolioPic from "../../assets/images/portfolioImg_nobg.png"
+import PortfolioPic from "../../assets/images/portfolioImg_nobg.webp"
 import PortfolioShape from "../../assets/images/PortfolioShape.png"
 // -----Animation Npm 
 import { TypeAnimation } from 'react-type-animation';

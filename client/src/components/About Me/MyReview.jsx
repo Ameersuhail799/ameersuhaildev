@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import reviewImg1 from '../../assets/images/reviewimg1.png';
+import reviewImg1 from '../../assets/images/reviewimg1.webp';
 import reviewImg2 from '../../assets/images/reviewPfp2.png';
 import reviewImg3 from '../../assets/images/reviewImg4.jpg';
 import reviewImg4 from '../../assets/images/reviewImg4.jpg';

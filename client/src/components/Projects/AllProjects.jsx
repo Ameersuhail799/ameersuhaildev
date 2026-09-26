@@ -24,7 +24,7 @@ const AllProjects = () => {
                     categoryServices.getCategories(),
                     api.get(`/projects`, {
                         params: {
-                            limit: 1000,
+                            limit: 12,
                             category: selected,
                         },
                     }),

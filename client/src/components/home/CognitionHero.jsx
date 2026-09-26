@@ -50,10 +50,10 @@ export function CognitionHero({ onExitIntro, isExiting, isActive = true }) {
     };
 
     Promise.all([
-      loadImg("/images/Base_image_desktop.png"),
-      loadImg("/images/Reveal_image_desktop.png"),
-      loadImg("/images/Base_image_mobile.png"),
-      loadImg("/images/Reveal_image_mobile.png"),
+      loadImg("/images/Base_image_desktop.webp"),
+      loadImg("/images/Reveal_image_desktop.webp"),
+      loadImg("/images/Base_image_mobile.webp"),
+      loadImg("/images/Reveal_image_mobile.webp"),
     ])
       .then(([baseDesk, revDesk, baseMob, revMob]) => {
         if (!isMounted) return;

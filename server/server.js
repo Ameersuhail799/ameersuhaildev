@@ -16,11 +16,22 @@ app.use(cors({
     origin: [
         "http://localhost:5173",
         "https://munna-scriptz.vercel.app",
+        "https://ameersuhaildev.vercel.app"
     ],
     credentials: true
 }))
+
+// HTTP Cache-Control header middleware for GET requests
+app.use((req, res, next) => {
+    if (req.method === 'GET') {
+        res.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=3600')
+    }
+    next()
+})
+
 // ------------------- Route 
 app.use(router)
+
 // ------------------- Database 
 dbConfig()
 cloudConfig()
@@ -29,7 +40,7 @@ cloudConfig()
 // ------------------- Server Listener 
 if (process.env.NODE_ENV !== "production") {
     app.listen(8000, () => {
-        console.log('Server Is Running')
+        console.log('Server Is Running on port 8000')
     })
 }
 

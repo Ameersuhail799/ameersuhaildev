@@ -11,14 +11,14 @@ import {
 import ScrollFloat from '../effects/ScrollFloat'
 
 // ── IMPORT ALL 8 VERIFIED CERTIFICATE IMAGES ──
-import datacampCertImg from '../../assets/images/certificates/datacamp_cert.png'
-import plutoCertImg from '../../assets/images/certificates/pluto_cert.png'
-import tataCertImg from '../../assets/images/certificates/tata_cert.png'
-import nasscomCertImg from '../../assets/images/certificates/nasscom_cert.png'
-import ibmSustainabilityCertImg from '../../assets/images/certificates/ibm_sustainability_cert.png'
-import googleCertImg from '../../assets/images/certificates/google_cert.png'
-import ibmAgentCertImg from '../../assets/images/certificates/ibm_agent_cert.png'
-import ciscoCertImg from '../../assets/images/certificates/cisco_cert.png'
+import datacampCertImg from '../../assets/images/certificates/datacamp_cert.webp'
+import plutoCertImg from '../../assets/images/certificates/pluto_cert.webp'
+import tataCertImg from '../../assets/images/certificates/tata_cert.webp'
+import nasscomCertImg from '../../assets/images/certificates/nasscom_cert.webp'
+import ibmSustainabilityCertImg from '../../assets/images/certificates/ibm_sustainability_cert.webp'
+import googleCertImg from '../../assets/images/certificates/google_cert.webp'
+import ibmAgentCertImg from '../../assets/images/certificates/ibm_agent_cert.webp'
+import ciscoCertImg from '../../assets/images/certificates/cisco_cert.webp'
 
 // ── ALL 8 TOP CURATED CREDENTIALS & EXPERIENCE ──
 const topCredentials = [
