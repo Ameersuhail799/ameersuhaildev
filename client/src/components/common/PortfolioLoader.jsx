@@ -9,10 +9,10 @@ export function PortfolioLoader({ onLoadingComplete, isExiting }) {
     let loadedCount = 0;
 
     const heroImages = [
-      "/images/Base_image_desktop.png",
-      "/images/Reveal_image_desktop.png",
-      "/images/Base_image_mobile.png",
-      "/images/Reveal_image_mobile.png",
+      "/images/Base_image_desktop.webp",
+      "/images/Reveal_image_desktop.webp",
+      "/images/Base_image_mobile.webp",
+      "/images/Reveal_image_mobile.webp",
     ];
 
     heroImages.forEach((src) => {
