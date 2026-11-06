@@ -2,8 +2,32 @@ import stylespotImg from '../assets/images/stylespot_preview.webp'
 import careerosImg from '../assets/images/careeros_preview.webp'
 import portfolioV1Img from '../assets/images/portfolio_v1_preview.webp'
 import activityPointImg from '../assets/images/activitypoint_preview.webp'
+import clubosImg from '../assets/images/clubos_preview.webp'
+import hostelmessImg from '../assets/images/hostelmess_preview.webp'
 
 export const defaultProjects = [
+  {
+    _id: "clubos",
+    title: "ClubOS — Tinkers Hub Management Platform",
+    type: "Full Stack / SaaS",
+    description: "An institutional multi-tenant management platform & PWA coordinating events, finance, task delegation, and public club profiles with strict role-based access control.",
+    technologies: ["Next.js 15", "React 19", "TypeScript", "Supabase", "Tailwind CSS"],
+    liveLink: "https://club-os-wheat.vercel.app",
+    githubRepo: "https://github.com/Ameersuhail799/ClubOs.git",
+    thumbnail: clubosImg,
+    featured: true
+  },
+  {
+    _id: "hostelmess",
+    title: "Hostel Mess Management Software 2.0",
+    type: "Full Stack / FinTech",
+    description: "A centralized hostel operations system managing student meal attendance, cutoff-controlled absence logging, automated expense calculation, UPI payments, and PDF billing.",
+    technologies: ["React 18", "TypeScript", "Vite", "Supabase", "Tailwind CSS", "jsPDF"],
+    liveLink: "https://hostel-mess-management-seven.vercel.app",
+    githubRepo: "https://github.com/Ameersuhail799/hostel-mess-management.git",
+    thumbnail: hostelmessImg,
+    featured: true
+  },
   {
     _id: "1",
     title: "StyleSpot — E-Commerce & CMS",
@@ -57,7 +81,7 @@ export const defaultProjects = [
     liveLink: "https://github.com/Ameersuhail799/ameer-portfolio.git",
     githubRepo: "https://github.com/Ameersuhail799/ameer-portfolio.git",
     thumbnail: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&auto=format&fit=crop&q=80",
-    featured: true
+    featured: false
   },
   {
     _id: "6",
