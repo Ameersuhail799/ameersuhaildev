@@ -7,17 +7,6 @@ import hostelmessImg from '../assets/images/hostelmess_preview.webp'
 
 export const defaultProjects = [
   {
-    _id: "clubos",
-    title: "ClubOS — Tinkers Hub Management Platform",
-    type: "Full Stack / SaaS",
-    description: "An institutional multi-tenant management platform & PWA coordinating events, finance, task delegation, and public club profiles with strict role-based access control.",
-    technologies: ["Next.js 15", "React 19", "TypeScript", "Supabase", "Tailwind CSS"],
-    liveLink: "https://club-os-wheat.vercel.app",
-    githubRepo: "https://github.com/Ameersuhail799/ClubOs.git",
-    thumbnail: clubosImg,
-    featured: true
-  },
-  {
     _id: "hostelmess",
     title: "Hostel Mess Management Software 2.0",
     type: "Full Stack / FinTech",
@@ -37,6 +26,17 @@ export const defaultProjects = [
     liveLink: "https://dotme-style-spot-c0233a21.vercel.app/",
     githubRepo: "https://github.com/Ameersuhail799/dotme-style-spot-c0233a21.git",
     thumbnail: stylespotImg,
+    featured: true
+  },
+  {
+    _id: "clubos",
+    title: "ClubOS — Tinkers Hub Management Platform",
+    type: "Full Stack / SaaS",
+    description: "An institutional multi-tenant management platform & PWA coordinating events, finance, task delegation, and public club profiles with strict role-based access control.",
+    technologies: ["Next.js 15", "React 19", "TypeScript", "Supabase", "Tailwind CSS"],
+    liveLink: "https://club-os-wheat.vercel.app",
+    githubRepo: "https://github.com/Ameersuhail799/ClubOs.git",
+    thumbnail: clubosImg,
     featured: true
   },
   {
