@@ -4,8 +4,32 @@ import portfolioV1Img from '../assets/images/portfolio_v1_preview.webp'
 import activityPointImg from '../assets/images/activitypoint_preview.webp'
 import clubosImg from '../assets/images/clubos_preview.webp'
 import hostelmessImg from '../assets/images/hostelmess_preview.webp'
+import relifeImg from '../assets/images/relife_preview.webp'
+import neurotradeImg from '../assets/images/neurotrade_preview.webp'
 
 export const defaultProjects = [
+  {
+    _id: "relife",
+    title: "ReLife — Circular IT Asset Intelligence Platform",
+    type: "AI & Sustainability / Full Stack",
+    description: "Enterprise circular IT hardware lifecycle platform built under UN SDG 12. Orchestrates second-life hardware redeployment, NIST SP 800-88 sanitization verification, lifecycle emissions modeling, and cryptographic chain-of-custody audit ledgers.",
+    technologies: ["FastAPI", "Python", "React 19", "TypeScript", "Tailwind CSS", "Vite"],
+    liveLink: "https://relife-eta.vercel.app",
+    githubRepo: "https://github.com/Ameersuhail799/RELIFE.git",
+    thumbnail: relifeImg,
+    featured: true
+  },
+  {
+    _id: "neurotrade",
+    title: "NeuroTrade AI — Quantitative Trading Workstation",
+    type: "Quantitative Finance / AI & Desktop",
+    description: "A high-performance algorithmic trading research station and execution engine. Implements causal multi-timeframe analysis (H1/M15/M5), purged rolling walk-forward backtesting, 5-stage strategy ablation, and dynamic ATR drawdown circuit breakers.",
+    technologies: ["Python 3.12", "PyQt6", "MetaTrader 5", "NumPy", "SQLite", "Scikit-learn"],
+    liveLink: "https://github.com/Ameersuhail799/NeuroTrade.git",
+    githubRepo: "https://github.com/Ameersuhail799/NeuroTrade.git",
+    thumbnail: neurotradeImg,
+    featured: true
+  },
   {
     _id: "hostelmess",
     title: "Hostel Mess Management Software 2.0",
